@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Flexico – Mobile Full</title>
+
+<style>
+:root{
+  --primary:#d81b7d;
+  --secondary:#8e1d6b;
+  --bg:#0a0a0d;
+  --card:#14141a;
+  --muted:#b8b8c2;
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  padding:0;
+  font-family:"Segoe UI",Roboto,"Noto Sans Sinhala",Arial,sans-serif;
+  background:var(--bg);
+  color:#fff;
+}
+
+.app{
+  min-height:100vh;
+  width:100%;
+}
+
+/* ================= TOP BAR ================= */
+.topbar{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 16px;
+}
+
+.brand{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.logo-img{
+  width:42px;
+  height:42px;
+  border-radius:10px;
+}
+
+.brand-text{
+  font-weight:900;
+  font-size:16px;
+}
+
+.btn{
+  background:#1f1f1f;
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  padding:10px 14px;
+  font-size:14px;
+}
+
+/* ================= CARD ================= */
+.card{
+  width:100%;
+  background:var(--card);
+  padding:18px 16px;
+}
+
+.headline{
+  text-align:center;
+  font-size:22px;
+  font-weight:900;
+}
+
+.sub{
+  text-align:center;
+  color:#bbb;
+  margin:8px 0 14px;
+  font-size:14px;
+}
+
+.hero{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  padding:18px;
+  border-radius:14px;
+  text-align:center;
+  font-weight:800;
+  margin-bottom:16px;
+}
+
+/* ================= RANGE ================= */
+.amount-display{
+  display:flex;
+  justify-content:space-between;
+  font-weight:800;
+}
+
+input[type=range]{
+  width:100%;
+  height:10px;
+  border-radius:10px;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  appearance:none;
+  margin:14px 0;
+}
+
+input[type=range]::-webkit-slider-thumb{
+  appearance:none;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:#fff;
+  border:6px solid var(--secondary);
+}
+
+.minmax{
+  display:flex;
+  justify-content:space-between;
+  color:#aaa;
+  font-size:13px;
+}
+
+/* ================= RESULTS ================= */
+.results{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:16px;
+}
+
+.result-box{
+  background:#1a1a1a;
+  border-radius:14px;
+  padding:14px;
+}
+
+.r-label{font-size:12px;color:#aaa}
+.r-value{font-weight:900;font-size:16px}
+
+/* ================= BUTTON ================= */
+.apply-button{
+  width:100%;
+  padding:16px;
+  margin-top:18px;
+  border:none;
+  border-radius:16px;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-size:16px;
+  font-weight:900;
+}
+
+.muted-note{
+  text-align:center;
+  font-size:12px;
+  color:#aaa;
+  margin-top:10px;
+}
+
+/* ================= SECTIONS ================= */
+section{
+  width:100%;
+  background:var(--card);
+  margin-top:16px;
+  padding:18px 16px;
+}
+
+section h2{
+  margin-top:0;
+}
+
+/* ================= IMAGE ================= */
+.app-image img{
+  width:100%;
+  display:block;
+  margin:20px 0;
+  border-radius:16px;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  background:#0b0b0b;
+  padding:24px 16px;
+  text-align:center;
+  color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- TOP -->
+<div class="topbar">
+  <div class="brand">
+    <img src="https://i.ibb.co/tpddVRTk/Chat-GPT-Image-Dec-3-2025-06-21-37-PM.png" class="logo-img">
+    <div>
+      <div class="brand-text">Flexico</div>
+      <div style="font-size:12px;color:#aaa">ඔබේ මුදල් සවන්ද</div>
+    </div>
+  </div>
+  <button class="btn">Log in</button>
+</div>
+
+<!-- CARD -->
+<div class="card">
+  <div class="headline">ක්ෂණික මුදල් රු. 500,000 දක්වා</div>
+  <div class="sub">විනාඩි කිහිපයකින් මුදල් ලබාගන්න</div>
+
+  <div class="hero">Flexico — online loan</div>
+
+  <div class="amount-display">
+    <span>ණය මුදල</span>
+    <span>රු <span id="amountText">30,000</span></span>
+  </div>
+
+  <input type="range" id="amountRange" min="30000" max="500000" step="10000" value="30000">
+  <div class="minmax"><span>30,000</span><span>500,000</span></div>
+
+  <div class="results">
+    <div class="result-box">
+      <div class="r-label">පොලී</div>
+      <div class="r-value">10%</div>
+    </div>
+    <div class="result-box">
+      <div class="r-label">මාසික</div>
+      <div class="r-value" id="monthlyValue">0</div>
+    </div>
+    <div class="result-box">
+      <div class="r-label">වාරික</div>
+      <div class="r-value" id="installmentsCount">-</div>
+    </div>
+    <div class="result-box">
+      <div class="r-label">සම්පූර්ණ</div>
+      <div class="r-value" id="totalPayable">0</div>
+    </div>
+  </div>
+
+  <button class="apply-button">අයදුම් කරන්න</button>
+  <div class="muted-note">මාසික වාරික අනුව ගණනය වේ</div>
+</div>
+
+<!-- IMAGE -->
+<div class="app-image">
+  <img src="https://i.ibb.co/S4z6jLqV/Whats-App-Image-2025-10-27-at-12-23-16-a07b1b8a.jpg" alt="Flexico App">
+</div>
+
+<!-- CONTACT -->
+<section>
+  <h2>අපව සම්බන්ධ කරගන්න</h2>
+  <div style="background:#1a1a1a;padding:16px;border-radius:14px;text-align:center;">
+    <div style="color:#aaa">Hotline</div>
+    <div style="font-size:20px;font-weight:900;color:#16c172">📞 077 943 1895</div>
+  </div>
+
+  <div style="margin-top:14px;text-align:center;">
+    <a href="https://wa.me/94779431895"
+       style="display:inline-block;padding:14px 20px;background:#25D366;color:#000;border-radius:14px;font-weight:900;text-decoration:none;">
+      💬 WhatsApp Chat
+    </a>
+  </div>
+</section>
+
+<footer>
+  © 2024–2025 Flexico Pvt Ltd
+</footer>
+
+</div>
+
+<script>
+const r=document.getElementById("amountRange");
+const t=document.getElementById("amountText");
+const m=document.getElementById("monthlyValue");
+const tot=document.getElementById("totalPayable");
+const i=document.getElementById("installmentsCount");
+
+function calc(v){
+  let n=v<70000?4:v<120000?12:v<200000?16:24;
+  let total=v*1.10;
+  return{n,monthly:total/n,total};
+}
+
+function update(){
+  let v=+r.value;
+  t.textContent=v.toLocaleString();
+  let c=calc(v);
+  m.textContent="රු "+Math.round(c.monthly).toLocaleString();
+  tot.textContent="රු "+Math.round(c.total).toLocaleString();
+  i.textContent=c.n+" වාරික";
+}
+r.addEventListener("input",update);
+update();
+</script>
+
+</body>
+</html>
