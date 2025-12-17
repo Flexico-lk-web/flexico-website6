@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Flexico – Mobile Full</title>
+<title>Flexico App</title>
 
 <style>
 :root{
@@ -25,24 +25,31 @@ html,body{
   color:#fff;
 }
 
+/* ================= APP WRAPPER ================= */
 .app{
   min-height:100vh;
   width:100%;
+  display:flex;
+  flex-direction:column;
 }
 
 /* ================= TOP BAR ================= */
 .topbar{
-  width:100%;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   padding:14px 16px;
+  background:#0a0a0d;
+  position:sticky;
+  top:0;
+  z-index:100;
+  border-bottom:1px solid #1a1a1a;
 }
 
 .brand{
   display:flex;
-  gap:10px;
   align-items:center;
+  gap:10px;
 }
 
 .logo-img{
@@ -65,11 +72,10 @@ html,body{
   font-size:14px;
 }
 
-/* ================= CARD ================= */
+/* ================= MAIN CARD ================= */
 .card{
-  width:100%;
   background:var(--card);
-  padding:18px 16px;
+  padding:20px 16px;
 }
 
 .headline{
@@ -105,8 +111,8 @@ input[type=range]{
   width:100%;
   height:10px;
   border-radius:10px;
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
   appearance:none;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
   margin:14px 0;
 }
 
@@ -122,8 +128,8 @@ input[type=range]::-webkit-slider-thumb{
 .minmax{
   display:flex;
   justify-content:space-between;
-  color:#aaa;
   font-size:13px;
+  color:#aaa;
 }
 
 /* ================= RESULTS ================= */
@@ -140,55 +146,95 @@ input[type=range]::-webkit-slider-thumb{
   padding:14px;
 }
 
-.r-label{font-size:12px;color:#aaa}
-.r-value{font-weight:900;font-size:16px}
+.r-label{
+  font-size:12px;
+  color:#aaa;
+}
+
+.r-value{
+  font-weight:900;
+  font-size:16px;
+}
 
 /* ================= BUTTON ================= */
 .apply-button{
   width:100%;
-  padding:16px;
+  padding:18px;
   margin-top:18px;
   border:none;
   border-radius:16px;
   background:linear-gradient(135deg,var(--primary),var(--secondary));
   color:#fff;
-  font-size:16px;
+  font-size:18px;
   font-weight:900;
-}
-
-.muted-note{
-  text-align:center;
-  font-size:12px;
-  color:#aaa;
-  margin-top:10px;
 }
 
 /* ================= SECTIONS ================= */
 section{
-  width:100%;
   background:var(--card);
-  margin-top:16px;
-  padding:18px 16px;
-}
-
-section h2{
-  margin-top:0;
+  padding:22px 16px;
+  margin-top:10px;
 }
 
 /* ================= IMAGE ================= */
 .app-image img{
   width:100%;
   display:block;
-  margin:20px 0;
+  margin:16px 0;
   border-radius:16px;
 }
 
 /* ================= FOOTER ================= */
 footer{
-  background:#0b0b0b;
-  padding:24px 16px;
   text-align:center;
+  padding:24px 16px;
   color:#aaa;
+  background:#0b0b0b;
+}
+
+/* ================= MOBILE APP BAR ================= */
+.mobile-bar{
+  display:none;
+}
+
+/* ================= MOBILE APP MODE ================= */
+@media (max-width:768px){
+
+  .card,
+  section{
+    border-radius:0;
+    margin:0;
+  }
+
+  .mobile-bar{
+    display:block;
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#0a0a0d;
+    padding:14px;
+    border-top:1px solid #1a1a1a;
+    z-index:999;
+  }
+
+  body{
+    padding-bottom:90px;
+  }
+}
+
+/* ================= DESKTOP ================= */
+@media (min-width:769px){
+  .app{
+    max-width:420px;
+    margin:auto;
+  }
+
+  .card,
+  section{
+    border-radius:16px;
+    margin:12px 0;
+  }
 }
 </style>
 </head>
@@ -197,7 +243,7 @@ footer{
 
 <div class="app">
 
-<!-- TOP -->
+<!-- TOP BAR -->
 <div class="topbar">
   <div class="brand">
     <img src="https://i.ibb.co/tpddVRTk/Chat-GPT-Image-Dec-3-2025-06-21-37-PM.png" class="logo-img">
@@ -209,7 +255,7 @@ footer{
   <button class="btn">Log in</button>
 </div>
 
-<!-- CARD -->
+<!-- MAIN -->
 <div class="card">
   <div class="headline">ක්ෂණික මුදල් රු. 500,000 දක්වා</div>
   <div class="sub">විනාඩි කිහිපයකින් මුදල් ලබාගන්න</div>
@@ -225,53 +271,34 @@ footer{
   <div class="minmax"><span>30,000</span><span>500,000</span></div>
 
   <div class="results">
-    <div class="result-box">
-      <div class="r-label">පොලී</div>
-      <div class="r-value">10%</div>
-    </div>
-    <div class="result-box">
-      <div class="r-label">මාසික</div>
-      <div class="r-value" id="monthlyValue">0</div>
-    </div>
-    <div class="result-box">
-      <div class="r-label">වාරික</div>
-      <div class="r-value" id="installmentsCount">-</div>
-    </div>
-    <div class="result-box">
-      <div class="r-label">සම්පූර්ණ</div>
-      <div class="r-value" id="totalPayable">0</div>
-    </div>
+    <div class="result-box"><div class="r-label">පොලී</div><div class="r-value">10%</div></div>
+    <div class="result-box"><div class="r-label">මාසික</div><div class="r-value" id="monthlyValue">0</div></div>
+    <div class="result-box"><div class="r-label">වාරික</div><div class="r-value" id="installmentsCount">-</div></div>
+    <div class="result-box"><div class="r-label">සම්පූර්ණ</div><div class="r-value" id="totalPayable">0</div></div>
   </div>
 
   <button class="apply-button">අයදුම් කරන්න</button>
-  <div class="muted-note">මාසික වාරික අනුව ගණනය වේ</div>
 </div>
 
-<!-- IMAGE -->
 <div class="app-image">
-  <img src="https://i.ibb.co/S4z6jLqV/Whats-App-Image-2025-10-27-at-12-23-16-a07b1b8a.jpg" alt="Flexico App">
+  <img src="https://i.ibb.co/S4z6jLqV/Whats-App-Image-2025-10-27-at-12-23-16-a07b1b8a.jpg">
 </div>
 
-<!-- CONTACT -->
 <section>
   <h2>අපව සම්බන්ධ කරගන්න</h2>
   <div style="background:#1a1a1a;padding:16px;border-radius:14px;text-align:center;">
     <div style="color:#aaa">Hotline</div>
     <div style="font-size:20px;font-weight:900;color:#16c172">📞 077 943 1895</div>
   </div>
-
-  <div style="margin-top:14px;text-align:center;">
-    <a href="https://wa.me/94779431895"
-       style="display:inline-block;padding:14px 20px;background:#25D366;color:#000;border-radius:14px;font-weight:900;text-decoration:none;">
-      💬 WhatsApp Chat
-    </a>
-  </div>
 </section>
 
-<footer>
-  © 2024–2025 Flexico Pvt Ltd
-</footer>
+<footer>© 2024–2025 Flexico Pvt Ltd</footer>
 
+</div>
+
+<!-- MOBILE FIXED BUTTON -->
+<div class="mobile-bar">
+  <button class="apply-button">අයදුම් කරන්න</button>
 </div>
 
 <script>
@@ -295,6 +322,7 @@ function update(){
   tot.textContent="රු "+Math.round(c.total).toLocaleString();
   i.textContent=c.n+" වාරික";
 }
+
 r.addEventListener("input",update);
 update();
 </script>
