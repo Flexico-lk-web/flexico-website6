@@ -12,7 +12,6 @@
   --secondary:#8e1d6b;
   --bg:#0a0a0d;
   --card:#14141a;
-  --muted:#b8b8c2;
 }
 
 *{box-sizing:border-box}
@@ -25,10 +24,9 @@ html,body{
   color:#fff;
 }
 
-/* ================= APP WRAPPER ================= */
+/* ================= APP ================= */
 .app{
   min-height:100vh;
-  width:100%;
   display:flex;
   flex-direction:column;
 }
@@ -36,8 +34,8 @@ html,body{
 /* ================= TOP BAR ================= */
 .topbar{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   padding:14px 16px;
   background:#0a0a0d;
   position:sticky;
@@ -48,8 +46,8 @@ html,body{
 
 .brand{
   display:flex;
-  align-items:center;
   gap:10px;
+  align-items:center;
 }
 
 .logo-img{
@@ -69,10 +67,9 @@ html,body{
   border:none;
   border-radius:10px;
   padding:10px 14px;
-  font-size:14px;
 }
 
-/* ================= MAIN CARD ================= */
+/* ================= CARD ================= */
 .card{
   background:var(--card);
   padding:20px 16px;
@@ -87,8 +84,8 @@ html,body{
 .sub{
   text-align:center;
   color:#bbb;
-  margin:8px 0 14px;
   font-size:14px;
+  margin:8px 0 14px;
 }
 
 .hero{
@@ -128,8 +125,8 @@ input[type=range]::-webkit-slider-thumb{
 .minmax{
   display:flex;
   justify-content:space-between;
-  font-size:13px;
   color:#aaa;
+  font-size:13px;
 }
 
 /* ================= RESULTS ================= */
@@ -146,15 +143,8 @@ input[type=range]::-webkit-slider-thumb{
   padding:14px;
 }
 
-.r-label{
-  font-size:12px;
-  color:#aaa;
-}
-
-.r-value{
-  font-weight:900;
-  font-size:16px;
-}
+.r-label{font-size:12px;color:#aaa}
+.r-value{font-weight:900;font-size:16px}
 
 /* ================= BUTTON ================= */
 .apply-button{
@@ -169,13 +159,6 @@ input[type=range]::-webkit-slider-thumb{
   font-weight:900;
 }
 
-/* ================= SECTIONS ================= */
-section{
-  background:var(--card);
-  padding:22px 16px;
-  margin-top:10px;
-}
-
 /* ================= IMAGE ================= */
 .app-image img{
   width:100%;
@@ -186,10 +169,36 @@ section{
 
 /* ================= FOOTER ================= */
 footer{
-  text-align:center;
-  padding:24px 16px;
-  color:#aaa;
-  background:#0b0b0b;
+  background:#22182a;
+  color:#fff;
+  padding:40px 20px;
+  font-family:'Noto Sans Sinhala',sans-serif;
+}
+
+.acc-btn{
+  width:100%;
+  background:none;
+  border:none;
+  color:#fff;
+  text-align:left;
+  padding:14px 0;
+  font-size:16px;
+  font-weight:700;
+  display:flex;
+  justify-content:space-between;
+  cursor:pointer;
+}
+
+.acc-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .3s ease;
+  color:#cbbad6;
+  font-size:14px;
+}
+
+.acc-btn.active + .acc-content{
+  max-height:400px;
 }
 
 /* ================= MOBILE APP BAR ================= */
@@ -197,15 +206,8 @@ footer{
   display:none;
 }
 
-/* ================= MOBILE APP MODE ================= */
+/* ================= MOBILE MODE ================= */
 @media (max-width:768px){
-
-  .card,
-  section{
-    border-radius:0;
-    margin:0;
-  }
-
   .mobile-bar{
     display:block;
     position:fixed;
@@ -217,24 +219,13 @@ footer{
     border-top:1px solid #1a1a1a;
     z-index:999;
   }
-
-  body{
-    padding-bottom:90px;
-  }
+  body{padding-bottom:90px;}
 }
 
 /* ================= DESKTOP ================= */
 @media (min-width:769px){
-  .app{
-    max-width:420px;
-    margin:auto;
-  }
-
-  .card,
-  section{
-    border-radius:16px;
-    margin:12px 0;
-  }
+  .app{max-width:420px;margin:auto;}
+  .card,footer{border-radius:16px;margin:12px 0;}
 }
 </style>
 </head>
@@ -243,7 +234,6 @@ footer{
 
 <div class="app">
 
-<!-- TOP BAR -->
 <div class="topbar">
   <div class="brand">
     <img src="https://i.ibb.co/tpddVRTk/Chat-GPT-Image-Dec-3-2025-06-21-37-PM.png" class="logo-img">
@@ -255,7 +245,6 @@ footer{
   <button class="btn">Log in</button>
 </div>
 
-<!-- MAIN -->
 <div class="card">
   <div class="headline">ක්ෂණික මුදල් රු. 500,000 දක්වා</div>
   <div class="sub">විනාඩි කිහිපයකින් මුදල් ලබාගන්න</div>
@@ -284,19 +273,44 @@ footer{
   <img src="https://i.ibb.co/S4z6jLqV/Whats-App-Image-2025-10-27-at-12-23-16-a07b1b8a.jpg">
 </div>
 
-<section>
-  <h2>අපව සම්බන්ධ කරගන්න</h2>
-  <div style="background:#1a1a1a;padding:16px;border-radius:14px;text-align:center;">
-    <div style="color:#aaa">Hotline</div>
-    <div style="font-size:20px;font-weight:900;color:#16c172">📞 077 943 1895</div>
-  </div>
-</section>
+<footer>
+  <div style="max-width:900px;margin:auto;">
 
-<footer>© 2024–2025 Flexico Pvt Ltd</footer>
+    <div style="display:flex;flex-wrap:wrap;gap:30px;">
+      <div>
+        <strong>📞 074 208 9009</strong><br>
+        <small>දුරකථන / Phone</small>
+      </div>
+      <div>
+        <strong>✉ info@flexico.lk</strong><br>
+        <small>Email</small>
+      </div>
+      <div>
+        <strong>⏰ Mon – Fri</strong><br>
+        <small>8.00 AM – 8.00 PM</small>
+      </div>
+    </div>
+
+    <hr style="margin:24px 0;border-color:rgba(255,255,255,0.1);">
+
+    <button class="acc-btn">සමාගම / Company <span>⌄</span></button>
+    <div class="acc-content">
+      Flexico (Private) Limited is a duly registered company in Sri Lanka providing fast online loans.
+    </div>
+
+    <button class="acc-btn">සමාජ මාධ්‍ය / Social <span>⌄</span></button>
+    <div class="acc-content">
+      <a href="https://www.facebook.com/share/16EbE2vyZg/?mibextid=wwXIfr" style="color:#22c18a;">Facebook</a>
+    </div>
+
+    <p style="margin-top:20px;font-size:13px;color:#b9a8c0;">
+      © 2024–2025 Flexico Pvt Ltd. All rights reserved.
+    </p>
+  </div>
+</footer>
 
 </div>
 
-<!-- MOBILE FIXED BUTTON -->
 <div class="mobile-bar">
   <button class="apply-button">අයදුම් කරන්න</button>
 </div>
@@ -322,6 +336,10 @@ function update(){
   tot.textContent="රු "+Math.round(c.total).toLocaleString();
   i.textContent=c.n+" වාරික";
 }
+
+document.querySelectorAll(".acc-btn").forEach(b=>{
+  b.onclick=()=>b.classList.toggle("active");
+});
 
 r.addEventListener("input",update);
 update();
