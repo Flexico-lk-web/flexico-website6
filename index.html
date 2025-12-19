@@ -146,17 +146,19 @@ input[type=range]::-webkit-slider-thumb{
 .r-label{font-size:12px;color:#aaa}
 .r-value{font-weight:900;font-size:16px}
 
-/* ================= BUTTON ================= */
+/* ================= APPLY BUTTON ================= */
 .apply-button{
   width:100%;
+  display:block;
+  text-align:center;
   padding:18px;
   margin-top:18px;
-  border:none;
   border-radius:16px;
   background:linear-gradient(135deg,var(--primary),var(--secondary));
   color:#fff;
   font-size:18px;
   font-weight:900;
+  text-decoration:none;
 }
 
 /* ================= IMAGE ================= */
@@ -201,12 +203,11 @@ footer{
   max-height:400px;
 }
 
-/* ================= MOBILE APP BAR ================= */
+/* ================= MOBILE BAR ================= */
 .mobile-bar{
   display:none;
 }
 
-/* ================= MOBILE MODE ================= */
 @media (max-width:768px){
   .mobile-bar{
     display:block;
@@ -222,7 +223,6 @@ footer{
   body{padding-bottom:90px;}
 }
 
-/* ================= DESKTOP ================= */
 @media (min-width:769px){
   .app{max-width:420px;margin:auto;}
   .card,footer{border-radius:16px;margin:12px 0;}
@@ -266,7 +266,10 @@ footer{
     <div class="result-box"><div class="r-label">සම්පූර්ණ</div><div class="r-value" id="totalPayable">0</div></div>
   </div>
 
-  <button class="https://forms.gle/3MZYPTzNFJw8UZTAA">අයදුම් කරන්න</button>
+  <!-- APPLY BUTTON (LINKED) -->
+  <a href="https://forms.gle/3MZYPTzNFJw8UZTAA" target="_blank" class="apply-button">
+    අයදුම් කරන්න
+  </a>
 </div>
 
 <div class="app-image">
@@ -275,20 +278,10 @@ footer{
 
 <footer>
   <div style="max-width:900px;margin:auto;">
-
     <div style="display:flex;flex-wrap:wrap;gap:30px;">
-      <div>
-        <strong>📞 074 208 9009</strong><br>
-        <small>දුරකථන / Phone</small>
-      </div>
-      <div>
-        <strong>✉ info@flexico.lk</strong><br>
-        <small>Email</small>
-      </div>
-      <div>
-        <strong>⏰ Mon – Fri</strong><br>
-        <small>8.00 AM – 8.00 PM</small>
-      </div>
+      <div><strong>📞 074 208 9009</strong><br><small>Phone</small></div>
+      <div><strong>✉ info@flexico.lk</strong><br><small>Email</small></div>
+      <div><strong>⏰ Mon – Fri</strong><br><small>8.00 AM – 8.00 PM</small></div>
     </div>
 
     <hr style="margin:24px 0;border-color:rgba(255,255,255,0.1);">
@@ -311,8 +304,11 @@ footer{
 
 </div>
 
+<!-- MOBILE APPLY BAR -->
 <div class="mobile-bar">
-  <button class="apply-button">අයදුම් කරන්න</button>
+  <a href="https://forms.gle/3MZYPTzNFJw8UZTAA" target="_blank" class="apply-button">
+    අයදුම් කරන්න
+  </a>
 </div>
 
 <script>
