@@ -173,6 +173,68 @@ button:active{transform:scale(0.96)}
 </style>
 </head>
 
+  .steps-card{
+  max-width:420px;
+  margin:30px auto;
+  background:#fff;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.step-item{
+  display:flex;
+  gap:14px;
+  padding:20px;
+  align-items:flex-start;
+}
+
+.step-item .icon{
+  font-size:34px;
+  color:#16c172;
+}
+
+.step-item h3{
+  margin:0;
+  font-size:18px;
+  font-weight:700;
+}
+
+.step-item p{
+  margin:6px 0 0;
+  font-size:14px;
+  color:#7a7a7a;
+  line-height:1.4;
+}
+
+.arrow{
+  text-align:center;
+  font-size:28px;
+  color:#cfcfcf;
+  padding:6px 0;
+}
+
+.arrow.active{
+  background:#16c172;
+  color:#fff;
+  border-radius:50%;
+  width:40px;
+  height:40px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.step-item.highlight{
+  background:#16c172;
+  color:#fff;
+}
+
+.step-item.highlight h3,
+.step-item.highlight p{
+  color:#fff;
+}
 <body>
 
 <!-- TOPBAR -->
