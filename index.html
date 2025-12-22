@@ -84,17 +84,6 @@ body{
   text-align:center;
   font-weight:800;
   font-size:16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-}
-.hero-img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  border-radius: 12px;
 }
 
 /* SLIDER */
@@ -223,6 +212,13 @@ button:active{transform:scale(0.96);}
   height: auto;
   border-radius: 16px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+.middle-image.show img {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* FOOTER */
@@ -278,8 +274,7 @@ button:active{transform:scale(0.96);}
 <!-- MAIN CARD -->
 <div class="card">
   <div class="hero" id="heroText">
-    <img src="https://via.placeholder.com/80" alt="Loan Icon" class="hero-img">
-    <span>ක්ෂණික මුදල් රු.500,000 දක්වා</span>
+    ක්ෂණික මුදල් රු.500,000 දක්වා
   </div>
 
   <div class="amount">
@@ -441,7 +436,7 @@ const subtitle = document.getElementById("subtitle");
 
 langBtn.onclick = () => {
  lang = lang === "si" ? "en" : "si";
- heroText.querySelector('span').innerText = t[lang].hero;
+ heroText.innerText = t[lang].hero;
  applyBtn.innerText = t[lang].apply;
  loanLabel.innerText = t[lang].loan;
  monLabel.innerText = t[lang].mon;
@@ -464,6 +459,18 @@ function checkSteps(){
 }
 window.addEventListener('scroll', checkSteps);
 window.addEventListener('load', checkSteps);
+
+/* ===== MIDDLE IMAGE SCROLL FADE-IN ===== */
+const middleImg = document.querySelector('.middle-image');
+function checkMiddleImg(){
+  const triggerBottom = window.innerHeight * 0.9;
+  const imgTop = middleImg.getBoundingClientRect().top;
+  if(imgTop < triggerBottom){
+    middleImg.classList.add('show');
+  }
+}
+window.addEventListener('scroll', checkMiddleImg);
+window.addEventListener('load', checkMiddleImg);
 </script>
 </body>
 </html>
