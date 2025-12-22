@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>eZycredit App</title>
 
+<meta name="theme-color" content="#16c172">
+
 <style>
 :root{
   --green:#16c172;
@@ -15,20 +17,20 @@
 }
 
 *{box-sizing:border-box}
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 body{
   margin:0;
   font-family:"Segoe UI","Noto Sans Sinhala",sans-serif;
   background:var(--bg);
   max-width:420px;
   margin:auto;
-  padding-bottom:90px;
+  padding-bottom:100px;
   overscroll-behavior:none;
+  padding-top:env(safe-area-inset-top);
+  padding-bottom:env(safe-area-inset-bottom);
 }
 
-/* ================= SPLASH ================= */
+/* ============ SPLASH ============ */
 #splash{
   position:fixed;
   inset:0;
@@ -40,6 +42,11 @@ body{
   color:#fff;
   font-weight:700;
   z-index:9999;
+}
+#splash.hide{
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .6s ease;
 }
 .splash-logo{
   width:80px;
@@ -54,7 +61,7 @@ body{
   margin-bottom:12px;
 }
 
-/* ================= TOPBAR ================= */
+/* ============ TOPBAR ============ */
 .topbar{
   position:sticky;
   top:0;
@@ -82,13 +89,8 @@ body{
   justify-content:center;
   font-weight:800;
 }
-.logo-text{
-  font-weight:800;
-}
-.sub{
-  font-size:12px;
-  color:var(--muted);
-}
+.logo-text{font-weight:800}
+.sub{font-size:12px;color:var(--muted)}
 .lang-btn{
   border:none;
   background:#f1f5f4;
@@ -97,16 +99,21 @@ body{
   font-weight:700;
 }
 
-/* ================= CARD ================= */
+/* ============ CARD ============ */
 .card{
   background:var(--card);
   margin:14px;
   padding:16px;
   border-radius:16px;
   box-shadow:0 10px 25px rgba(0,0,0,.06);
+  animation:fadeUp .6s ease;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:none}
 }
 
-/* ================= HERO ================= */
+/* ============ HERO ============ */
 .hero{
   background:linear-gradient(90deg,var(--green),var(--dark));
   color:#fff;
@@ -116,18 +123,24 @@ body{
   font-weight:800;
 }
 
-/* ================= SLIDER ================= */
+/* ============ SLIDER ============ */
 .amount{
   display:flex;
   justify-content:space-between;
   font-weight:700;
   margin:14px 0 6px;
 }
-input[type=range]{
-  width:100%;
+input[type=range]{width:100%}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  background:#fff;
+  border:6px solid var(--dark);
 }
 
-/* ================= RESULTS ================= */
+/* ============ RESULTS ============ */
 .results{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -139,15 +152,10 @@ input[type=range]{
   padding:10px;
   border-radius:10px;
 }
-.label{
-  font-size:12px;
-  color:var(--muted);
-}
-.value{
-  font-weight:800;
-}
+.label{font-size:12px;color:var(--muted)}
+.value{font-weight:800}
 
-/* ================= BUTTON ================= */
+/* ============ BUTTON ============ */
 .apply{
   margin-top:16px;
   width:100%;
@@ -159,11 +167,9 @@ input[type=range]{
   font-size:16px;
   font-weight:800;
 }
-button:active{
-  transform:scale(0.96);
-}
+button:active{transform:scale(0.96)}
 
-/* ================= FOOTER ================= */
+/* ============ FOOTER ============ */
 .footer{
   background:#1d1d2e;
   color:#fff;
@@ -171,12 +177,9 @@ button:active{
   margin-top:30px;
   border-radius:22px 22px 0 0;
 }
-.footer p{
-  font-size:13px;
-  color:#ccc;
-}
+.footer p{font-size:13px;color:#ccc}
 
-/* ================= FLOAT BUTTONS ================= */
+/* ============ FLOAT BUTTONS ============ */
 .fab-wrap{
   position:fixed;
   bottom:20px;
@@ -201,7 +204,6 @@ button:active{
 }
 .call{background:#0aa764}
 .whatsapp{background:#25D366}
-
 @keyframes pulse{
   0%{transform:scale(1)}
   50%{transform:scale(1.08)}
@@ -243,7 +245,7 @@ button:active{
 
   <div class="results">
     <div class="box">
-      <div class="label" id="intLabel">පොලී</div>
+      <div class="label">පොලී</div>
       <div class="value">7%</div>
     </div>
     <div class="box">
@@ -260,10 +262,7 @@ button:active{
     </div>
   </div>
 
-  <button class="apply" id="applyBtn"
-    onclick="window.open('https://forms.gle/axZ8a9Uje5NqNFmcA')">
-    අයදුම් කරන්න
-  </button>
+  <button class="apply" id="applyBtn">අයදුම් කරන්න</button>
 </div>
 
 <!-- FOOTER -->
@@ -273,7 +272,7 @@ button:active{
   <p>© 2025 eZycredit Pvt Ltd</p>
 </div>
 
-<!-- FLOATING BUTTONS -->
+<!-- FLOAT -->
 <div class="fab-wrap">
   <a href="tel:0740436005" class="fab call">📞</a>
   <a href="https://wa.me/94740436005" class="fab whatsapp">💬</a>
@@ -282,7 +281,7 @@ button:active{
 <script>
 /* SPLASH */
 window.addEventListener("load",()=>{
-  setTimeout(()=>document.getElementById("splash").style.display="none",800);
+  setTimeout(()=>document.getElementById("splash").classList.add("hide"),900);
 });
 
 /* CALCULATOR */
@@ -303,7 +302,19 @@ function calc(v){
 r.oninput=()=>calc(+r.value);
 calc(30000);
 
-/* LANGUAGE TOGGLE */
+/* APPLY BUTTON */
+document.getElementById("applyBtn").onclick=()=>{
+ const b=document.getElementById("applyBtn");
+ b.innerText="Processing...";
+ b.disabled=true;
+ setTimeout(()=>{
+   window.open("https://forms.gle/axZ8a9Uje5NqNFmcA");
+   b.innerText="අයදුම් කරන්න";
+   b.disabled=false;
+ },800);
+};
+
+/* LANGUAGE */
 let lang="si";
 const t={
  si:{
@@ -328,14 +339,14 @@ const t={
 
 document.getElementById("langBtn").onclick=()=>{
  lang=lang==="si"?"en":"si";
- document.getElementById("heroText").innerText=t[lang].hero;
- document.getElementById("applyBtn").innerText=t[lang].apply;
- document.getElementById("loanLabel").innerText=t[lang].loan;
- document.getElementById("monLabel").innerText=t[lang].mon;
- document.getElementById("insLabel").innerText=t[lang].ins;
- document.getElementById("totLabel").innerText=t[lang].tot;
- document.getElementById("subtitle").innerText=t[lang].sub;
- document.getElementById("langBtn").innerText=lang==="si"?"EN":"සිං";
+ heroText.innerText=t[lang].hero;
+ applyBtn.innerText=t[lang].apply;
+ loanLabel.innerText=t[lang].loan;
+ monLabel.innerText=t[lang].mon;
+ insLabel.innerText=t[lang].ins;
+ totLabel.innerText=t[lang].tot;
+ subtitle.innerText=t[lang].sub;
+ langBtn.innerText=lang==="si"?"EN":"සිං";
 };
 </script>
 
