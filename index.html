@@ -14,29 +14,55 @@
   --muted:#8b98a0;
 }
 
-/* ===== Global ===== */
 *{box-sizing:border-box}
-html,body{
-  margin:0;
-  padding:0;
-  background:var(--bg);
-  font-family:"Segoe UI",Roboto,"Noto Sans Sinhala",sans-serif;
-  overscroll-behavior:none;
+html{
+  scroll-behavior:smooth;
 }
 body{
+  margin:0;
+  font-family:"Segoe UI","Noto Sans Sinhala",sans-serif;
+  background:var(--bg);
   max-width:420px;
   margin:auto;
+  padding-bottom:90px;
+  overscroll-behavior:none;
 }
 
-/* ===== Top Bar ===== */
+/* ================= SPLASH ================= */
+#splash{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(135deg,var(--green),var(--dark));
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-weight:700;
+  z-index:9999;
+}
+.splash-logo{
+  width:80px;
+  height:80px;
+  background:#fff;
+  color:var(--dark);
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  margin-bottom:12px;
+}
+
+/* ================= TOPBAR ================= */
 .topbar{
   position:sticky;
   top:0;
   background:#fff;
+  padding:12px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:12px;
   box-shadow:0 3px 10px rgba(0,0,0,.05);
   z-index:100;
 }
@@ -63,46 +89,50 @@ body{
   font-size:12px;
   color:var(--muted);
 }
+.lang-btn{
+  border:none;
+  background:#f1f5f4;
+  padding:6px 14px;
+  border-radius:20px;
+  font-weight:700;
+}
 
-/* ===== Cards ===== */
+/* ================= CARD ================= */
 .card{
   background:var(--card);
   margin:14px;
   padding:16px;
-  border-radius:14px;
-  box-shadow:0 10px 25px rgba(0,0,0,.05);
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.06);
 }
 
-/* ===== Hero ===== */
+/* ================= HERO ================= */
 .hero{
   background:linear-gradient(90deg,var(--green),var(--dark));
   color:#fff;
-  padding:20px;
+  padding:22px;
+  border-radius:14px;
   text-align:center;
-  border-radius:12px;
-  font-weight:700;
+  font-weight:800;
 }
 
-/* ===== Slider ===== */
-.range{
-  width:100%;
-}
+/* ================= SLIDER ================= */
 .amount{
   display:flex;
   justify-content:space-between;
   font-weight:700;
-  margin-top:10px;
+  margin:14px 0 6px;
 }
 input[type=range]{
   width:100%;
 }
 
-/* ===== Results ===== */
+/* ================= RESULTS ================= */
 .results{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
-  margin-top:15px;
+  margin-top:14px;
 }
 .box{
   background:#f6faf8;
@@ -117,33 +147,36 @@ input[type=range]{
   font-weight:800;
 }
 
-/* ===== Button ===== */
+/* ================= BUTTON ================= */
 .apply{
-  margin-top:15px;
+  margin-top:16px;
   width:100%;
   padding:14px;
   background:linear-gradient(90deg,var(--green),var(--dark));
   color:#fff;
   border:none;
-  border-radius:12px;
+  border-radius:14px;
   font-size:16px;
   font-weight:800;
 }
+button:active{
+  transform:scale(0.96);
+}
 
-/* ===== Footer ===== */
+/* ================= FOOTER ================= */
 .footer{
   background:#1d1d2e;
   color:#fff;
-  padding:25px 16px 80px;
+  padding:26px 16px 90px;
   margin-top:30px;
-  border-radius:20px 20px 0 0;
+  border-radius:22px 22px 0 0;
 }
 .footer p{
   font-size:13px;
   color:#ccc;
 }
 
-/* ===== Floating Buttons ===== */
+/* ================= FLOAT BUTTONS ================= */
 .fab-wrap{
   position:fixed;
   bottom:20px;
@@ -151,10 +184,11 @@ input[type=range]{
   display:flex;
   flex-direction:column;
   gap:12px;
+  z-index:200;
 }
 .fab{
-  width:55px;
-  height:55px;
+  width:56px;
+  height:56px;
   border-radius:50%;
   display:flex;
   align-items:center;
@@ -173,39 +207,35 @@ input[type=range]{
   50%{transform:scale(1.08)}
   100%{transform:scale(1)}
 }
-
-/* ===== Scroll Animation ===== */
-.reveal{
-  opacity:0;
-  transform:translateY(40px);
-  transition:.6s;
-}
-.reveal.active{
-  opacity:1;
-  transform:none;
-}
 </style>
 </head>
 
 <body>
 
-<!-- Top -->
+<!-- SPLASH -->
+<div id="splash">
+  <div class="splash-logo">eZ</div>
+  <div>eZycredit Loading...</div>
+</div>
+
+<!-- TOPBAR -->
 <div class="topbar">
   <div class="logo">
     <div class="logo-box">eZ</div>
     <div>
       <div class="logo-text">eZycredit</div>
-      <div class="sub">ඔබේ විශ්වාසදායක ණය සහකරු</div>
+      <div class="sub" id="subtitle">ඔබේ විශ්වාසදායක ණය සහකරු</div>
     </div>
   </div>
+  <button id="langBtn" class="lang-btn">EN</button>
 </div>
 
-<!-- Main Card -->
-<div class="card reveal">
-  <div class="hero">ක්ෂණික මුදල් රු.500,000 දක්වා</div>
+<!-- MAIN -->
+<div class="card">
+  <div class="hero" id="heroText">ක්ෂණික මුදල් රු.500,000 දක්වා</div>
 
   <div class="amount">
-    <span>ණය මුදල</span>
+    <span id="loanLabel">ණය මුදල</span>
     <span>රු <span id="amt">30,000</span></span>
   </div>
 
@@ -213,42 +243,49 @@ input[type=range]{
 
   <div class="results">
     <div class="box">
-      <div class="label">පොලී</div>
+      <div class="label" id="intLabel">පොලී</div>
       <div class="value">7%</div>
     </div>
     <div class="box">
-      <div class="label">මාසික වාරිකය</div>
+      <div class="label" id="monLabel">මාසික වාරිකය</div>
       <div class="value" id="monthly">රු 0</div>
     </div>
     <div class="box">
-      <div class="label">වාරික</div>
+      <div class="label" id="insLabel">වාරික</div>
       <div class="value" id="months">-</div>
     </div>
     <div class="box">
-      <div class="label">මුළු ගෙවීම</div>
+      <div class="label" id="totLabel">මුළු ගෙවීම</div>
       <div class="value" id="total">රු 0</div>
     </div>
   </div>
 
-  <button class="apply" onclick="window.open('https://forms.gle/axZ8a9Uje5NqNFmcA')">
+  <button class="apply" id="applyBtn"
+    onclick="window.open('https://forms.gle/axZ8a9Uje5NqNFmcA')">
     අයදුම් කරන්න
   </button>
 </div>
 
-<!-- Footer -->
-<div class="footer reveal">
+<!-- FOOTER -->
+<div class="footer">
   <p>📞 074 043 6005</p>
   <p>⏰ උදෑසන 9.00 – රාත්‍රී 9.00</p>
   <p>© 2025 eZycredit Pvt Ltd</p>
 </div>
 
-<!-- Floating Buttons -->
+<!-- FLOATING BUTTONS -->
 <div class="fab-wrap">
   <a href="tel:0740436005" class="fab call">📞</a>
   <a href="https://wa.me/94740436005" class="fab whatsapp">💬</a>
 </div>
 
 <script>
+/* SPLASH */
+window.addEventListener("load",()=>{
+  setTimeout(()=>document.getElementById("splash").style.display="none",800);
+});
+
+/* CALCULATOR */
 const r=document.getElementById("range");
 const amt=document.getElementById("amt");
 const monthly=document.getElementById("monthly");
@@ -256,25 +293,50 @@ const total=document.getElementById("total");
 const months=document.getElementById("months");
 
 function calc(v){
- let n= v<70000?4:v<120000?12:v<200000?16:24;
+ let n=v<70000?4:v<120000?12:v<200000?16:24;
  let t=v*1.07;
+ amt.innerText=v.toLocaleString();
  monthly.innerText="රු "+Math.round(t/n).toLocaleString();
  total.innerText="රු "+Math.round(t).toLocaleString();
  months.innerText=n+" මාස";
- amt.innerText=v.toLocaleString();
 }
 r.oninput=()=>calc(+r.value);
 calc(30000);
 
-/* scroll reveal */
-const els=document.querySelectorAll(".reveal");
-window.addEventListener("scroll",()=>{
- els.forEach(e=>{
-  if(e.getBoundingClientRect().top<window.innerHeight-60){
-    e.classList.add("active");
-  }
- });
-});
+/* LANGUAGE TOGGLE */
+let lang="si";
+const t={
+ si:{
+  hero:"ක්ෂණික මුදල් රු.500,000 දක්වා",
+  apply:"අයදුම් කරන්න",
+  loan:"ණය මුදල",
+  mon:"මාසික වාරිකය",
+  ins:"වාරික",
+  tot:"මුළු ගෙවීම",
+  sub:"ඔබේ විශ්වාසදායක ණය සහකරු"
+ },
+ en:{
+  hero:"Instant Loans up to Rs.500,000",
+  apply:"Apply Now",
+  loan:"Loan Amount",
+  mon:"Monthly Payment",
+  ins:"Installments",
+  tot:"Total Payable",
+  sub:"Your trusted loan partner"
+ }
+};
+
+document.getElementById("langBtn").onclick=()=>{
+ lang=lang==="si"?"en":"si";
+ document.getElementById("heroText").innerText=t[lang].hero;
+ document.getElementById("applyBtn").innerText=t[lang].apply;
+ document.getElementById("loanLabel").innerText=t[lang].loan;
+ document.getElementById("monLabel").innerText=t[lang].mon;
+ document.getElementById("insLabel").innerText=t[lang].ins;
+ document.getElementById("totLabel").innerText=t[lang].tot;
+ document.getElementById("subtitle").innerText=t[lang].sub;
+ document.getElementById("langBtn").innerText=lang==="si"?"EN":"සිං";
+};
 </script>
 
 </body>
