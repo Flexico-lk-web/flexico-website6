@@ -14,7 +14,6 @@
   --card:#ffffff;
   --muted:#8b98a0;
 }
-
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
@@ -319,7 +318,7 @@ button:active{transform:scale(0.96);}
 
 <!-- JS -->
 <script>
-/* ===== SMOOTH NUMBER ANIMATION ===== */
+/* ===== ANIMATE NUMBERS ===== */
 function animateValue(el, start, end, duration=200){
   let startTime=null;
   function anim(t){
@@ -332,7 +331,7 @@ function animateValue(el, start, end, duration=200){
   requestAnimationFrame(anim);
 }
 
-/* ===== CALCULATOR (10%) ===== */
+/* ===== CALCULATOR ===== */
 const r=document.getElementById("range");
 const amt=document.getElementById("amt");
 const monthly=document.getElementById("monthly");
