@@ -159,14 +159,9 @@ button:active{transform:scale(0.96);}
   opacity:1;
   transform:translateY(0);
 }
-.step-item .icon, .step-item .text{
-  position:relative;
-  z-index:1;
-}
-.step-item .step-img{
-  width:50px;
-  height:50px;
-  object-fit:contain;
+.step-item .icon{
+  font-size:34px;
+  color:#16c172;
 }
 .step-item h3{
   margin:0;
@@ -291,9 +286,7 @@ button:active{transform:scale(0.96);}
 <!-- STEPS -->
 <section class="steps-card">
   <div class="step-item">
-    <div class="icon">
-      <img src="<a href="https://imgbb.com/"><img src="https://i.ibb.co/RGrMYNpN/Red-White-Initial-E-Energy-Logo.png" alt="Red White Initial E Energy Logo" border="0"></a>" alt="Step 1" class="step-img">
-    </div>
+    <div class="icon">👆</div>
     <div class="text">
       <h3>Fill out the application form</h3>
       <p>Complete registration documents as instructed</p>
@@ -301,9 +294,7 @@ button:active{transform:scale(0.96);}
   </div>
   <div class="arrow">⌄</div>
   <div class="step-item">
-    <div class="icon">
-      <img src="images/step2.png" alt="Step 2" class="step-img">
-    </div>
+    <div class="icon">💰</div>
     <div class="text">
       <h3>Wait for review results</h3>
       <p>Get the results the same day after completing the application</p>
@@ -311,9 +302,7 @@ button:active{transform:scale(0.96);}
   </div>
   <div class="arrow active">⌄</div>
   <div class="step-item highlight">
-    <div class="icon">
-      <img src="images/step3.png" alt="Step 3" class="step-img">
-    </div>
+    <div class="icon">💵</div>
     <div class="text">
       <h3>Receive a loan</h3>
       <p>Get money into your bank account</p>
@@ -431,7 +420,7 @@ langBtn.onclick = () => {
 
 /* ===== STEP ITEMS SCROLL ANIMATION ===== */
 const steps = document.querySelectorAll('.step-item');
-function revealSteps() {
+function checkSteps(){
   const triggerBottom = window.innerHeight * 0.9;
   steps.forEach(step => {
     const stepTop = step.getBoundingClientRect().top;
@@ -440,8 +429,8 @@ function revealSteps() {
     }
   });
 }
-window.addEventListener('scroll', revealSteps);
-window.addEventListener('load', revealSteps);
+window.addEventListener('scroll', checkSteps);
+window.addEventListener('load', checkSteps);
 </script>
 </body>
 </html>
