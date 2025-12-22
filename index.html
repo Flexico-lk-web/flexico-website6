@@ -1,22 +1,19 @@
 <!doctype html>
 <html lang="si">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>eZycredit</title>
 
-<!-- PWA / Mobile App Feel -->
 <meta name="theme-color" content="#0aa764">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="eZycredit">
 
 <style>
 :root{
   --green:#0aa764;
   --green2:#16c172;
   --bg:#f6fbf9;
-  --card:#fff;
+  --card:#ffffff;
   --muted:#7a8b91;
 }
 
@@ -27,10 +24,8 @@
 
 html,body{
   margin:0;
-  padding:0;
   background:var(--bg);
-  font-family:"Segoe UI","Noto Sans Sinhala",sans-serif;
-  overscroll-behavior:none;
+  font-family:"Noto Sans Sinhala","Segoe UI",sans-serif;
 }
 
 .app{
@@ -41,14 +36,8 @@ html,body{
 /* Top */
 .topbar{
   display:flex;
-  justify-content:space-between;
   align-items:center;
   padding:12px;
-}
-.brand{
-  display:flex;
-  gap:10px;
-  align-items:center;
 }
 .logo{
   width:42px;
@@ -56,16 +45,18 @@ html,body{
   border-radius:10px;
   background:linear-gradient(135deg,var(--green2),var(--green));
   color:#fff;
-  font-weight:800;
   display:flex;
   align-items:center;
   justify-content:center;
-}
-.brand-name{
   font-weight:800;
+}
+.brand{
+  margin-left:10px;
+}
+.brand b{
   font-size:18px;
 }
-.brand-sub{
+.brand span{
   font-size:12px;
   color:var(--muted);
 }
@@ -73,10 +64,10 @@ html,body{
 /* Card */
 .card{
   background:var(--card);
-  border-radius:16px;
-  margin:10px;
+  margin:12px;
   padding:16px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.06);
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 .headline{
   text-align:center;
@@ -93,10 +84,10 @@ html,body{
   background:linear-gradient(90deg,var(--green2),var(--green));
   color:#fff;
   text-align:center;
-  padding:16px;
+  padding:14px;
   border-radius:12px;
   font-weight:700;
-  margin-bottom:14px;
+  margin-bottom:12px;
 }
 
 /* Slider */
@@ -109,6 +100,7 @@ input[type=range]{
   width:100%;
   margin:10px 0;
 }
+
 .results{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -120,7 +112,6 @@ input[type=range]{
   padding:10px;
 }
 .result span{
-  display:block;
   font-size:12px;
   color:var(--muted);
 }
@@ -130,40 +121,28 @@ input[type=range]{
 
 /* Button */
 .apply{
-  margin-top:14px;
   width:100%;
+  margin-top:14px;
   padding:14px;
   border:none;
   border-radius:12px;
   background:linear-gradient(90deg,var(--green2),var(--green));
   color:#fff;
-  font-weight:800;
   font-size:16px;
+  font-weight:800;
 }
-button:active{
+.apply:active{
   transform:scale(0.97);
-}
-
-/* Reveal Animation */
-.reveal{
-  opacity:0;
-  transform:translateY(40px);
-  transition:0.6s;
-}
-.reveal.active{
-  opacity:1;
-  transform:none;
 }
 
 /* Floating Buttons */
 .floating{
   position:fixed;
-  right:18px;
   bottom:18px;
+  right:18px;
   display:flex;
   flex-direction:column;
   gap:12px;
-  z-index:999;
 }
 .fab{
   width:56px;
@@ -172,8 +151,8 @@ button:active{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:24px;
   color:#fff;
+  font-size:24px;
   text-decoration:none;
   box-shadow:0 6px 16px rgba(0,0,0,.3);
 }
@@ -183,31 +162,30 @@ button:active{
 </head>
 
 <body>
+
 <div class="app">
 
   <!-- Top -->
   <div class="topbar">
+    <div class="logo">EZ</div>
     <div class="brand">
-      <div class="logo">EZ</div>
-      <div>
-        <div class="brand-name">eZycredit</div>
-        <div class="brand-sub">ඔබේ මුදල් සවන්ද</div>
-      </div>
+      <b>eZycredit</b><br>
+      <span>ඔබේ මුදල් සවන්ද</span>
     </div>
   </div>
 
   <!-- Calculator -->
-  <div class="card reveal">
+  <div class="card">
     <div class="headline">ක්ෂණික මුදල් රු. 500,000 දක්වා</div>
     <div class="sub">විනාඩි කිහිපයකින් මුදල් ලබාගන්න</div>
-    <div class="hero">eZycredit – වේගවත් සහ ආරක්ෂිත</div>
+    <div class="hero">eZycredit – වේගවත් හා ආරක්ෂිත</div>
 
     <div class="amount">
       <span>ණය මුදල</span>
       <span>රු <b id="amtTxt">30,000</b></span>
     </div>
 
-    <input type="range" id="amt" min="30000" max="500000" step="10000" value="30000">
+    <input type="range" id="amount" min="30000" max="500000" step="10000" value="30000">
 
     <div class="results">
       <div class="result"><span>පොලී</span><b>7%</b></div>
@@ -224,46 +202,44 @@ button:active{
 
 </div>
 
-<!-- Floating Buttons -->
+<!-- Floating -->
 <div class="floating">
   <a href="tel:0740436005" class="fab call">📞</a>
   <a href="https://wa.me/94740436005" class="fab whatsapp">💬</a>
 </div>
 
 <script>
-const amt=document.getElementById("amt");
+const amount=document.getElementById("amount");
 const amtTxt=document.getElementById("amtTxt");
 const monthly=document.getElementById("monthly");
 const total=document.getElementById("total");
 const months=document.getElementById("months");
+const applyBtn=document.getElementById("applyBtn");
 
-function calc(v){
- let m=v<70000?4:v<120000?12:v<200000?16:24;
- let t=v+(v*0.07);
- monthly.innerText="රු "+Math.round(t/m).toLocaleString();
- total.innerText="රු "+Math.round(t).toLocaleString();
- months.innerText=m+" වාරික";
- amtTxt.innerText=v.toLocaleString();
-}
-amt.oninput=()=>calc(+amt.value);
-calc(30000);
+function calculate(v){
+  let n;
+  if(v<70000) n=4;
+  else if(v<120000) n=12;
+  else if(v<200000) n=16;
+  else n=24;
 
-/* Working hours 9AM–9PM */
-let h=new Date().getHours();
-if(h<9||h>=21){
- applyBtn.disabled=true;
- applyBtn.innerText="සේවාව 9AM - 9PM";
- applyBtn.style.opacity=.6;
+  let t=v+(v*0.07);
+  monthly.innerText="රු "+Math.round(t/n).toLocaleString();
+  total.innerText="රු "+Math.round(t).toLocaleString();
+  months.innerText=n+" වාරික";
+  amtTxt.innerText=v.toLocaleString();
 }
 
-/* Scroll Animation */
-window.addEventListener("scroll",()=>{
- document.querySelectorAll(".reveal").forEach(el=>{
-  if(el.getBoundingClientRect().top < innerHeight-80){
-    el.classList.add("active");
-  }
- });
-});
+amount.addEventListener("input",()=>calculate(+amount.value));
+calculate(30000);
+
+/* Working hours 9AM - 9PM */
+const hour=new Date().getHours();
+if(hour<9 || hour>=21){
+  applyBtn.disabled=true;
+  applyBtn.innerText="සේවාව 9AM - 9PM";
+  applyBtn.style.opacity="0.6";
+}
 </script>
 
 </body>
