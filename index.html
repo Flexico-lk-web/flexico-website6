@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>eZycredit App</title>
-
 <meta name="theme-color" content="#16c172">
 
 <style>
@@ -16,21 +15,20 @@
   --muted:#8b98a0;
 }
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
 body{
   margin:0;
   font-family:"Segoe UI","Noto Sans Sinhala",sans-serif;
   background:var(--bg);
   max-width:420px;
   margin:auto;
-  padding-bottom:100px;
-  overscroll-behavior:none;
   padding-top:env(safe-area-inset-top);
   padding-bottom:env(safe-area-inset-bottom);
+  overscroll-behavior: none;
 }
 
-/* ============ TOPBAR ============ */
+/* TOPBAR */
 .topbar{
   position:sticky;
   top:0;
@@ -58,17 +56,18 @@ body{
   justify-content:center;
   font-weight:800;
 }
-.logo-text{font-weight:800}
-.sub{font-size:12px;color:var(--muted)}
+.logo-text{font-weight:800;}
+.sub{font-size:12px;color:var(--muted);}
 .lang-btn{
   border:none;
   background:#f1f5f4;
   padding:6px 14px;
   border-radius:20px;
   font-weight:700;
+  cursor:pointer;
 }
 
-/* ============ CARD ============ */
+/* CARD */
 .card{
   background:var(--card);
   margin:14px;
@@ -77,7 +76,7 @@ body{
   box-shadow:0 10px 25px rgba(0,0,0,.06);
 }
 
-/* ============ HERO ============ */
+/* HERO */
 .hero{
   background:linear-gradient(90deg,var(--green),var(--dark));
   color:#fff;
@@ -85,16 +84,17 @@ body{
   border-radius:14px;
   text-align:center;
   font-weight:800;
+  font-size:16px;
 }
 
-/* ============ SLIDER ============ */
+/* SLIDER */
 .amount{
   display:flex;
   justify-content:space-between;
   font-weight:700;
   margin:14px 0 6px;
 }
-input[type=range]{width:100%}
+input[type=range]{width:100%;}
 input[type=range]::-webkit-slider-thumb{
   -webkit-appearance:none;
   width:26px;
@@ -104,7 +104,7 @@ input[type=range]::-webkit-slider-thumb{
   border:6px solid var(--dark);
 }
 
-/* ============ RESULTS ============ */
+/* RESULTS */
 .results{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -116,13 +116,13 @@ input[type=range]::-webkit-slider-thumb{
   padding:10px;
   border-radius:10px;
 }
-.label{font-size:12px;color:var(--muted)}
+.label{font-size:12px;color:var(--muted);}
 .value{
   font-weight:800;
   transition:all .25s ease;
 }
 
-/* ============ BUTTON ============ */
+/* BUTTON */
 .apply{
   margin-top:16px;
   width:100%;
@@ -133,10 +133,68 @@ input[type=range]::-webkit-slider-thumb{
   border-radius:14px;
   font-size:16px;
   font-weight:800;
+  cursor:pointer;
 }
-button:active{transform:scale(0.96)}
+button:active{transform:scale(0.96);}
 
-/* ============ FOOTER ============ */
+/* STEPS */
+.steps-card{
+  max-width:420px;
+  margin:30px auto;
+  background:#fff;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  padding:10px 0;
+}
+.step-item{
+  display:flex;
+  gap:14px;
+  padding:20px;
+  align-items:flex-start;
+}
+.step-item .icon{
+  font-size:34px;
+  color:#16c172;
+}
+.step-item h3{
+  margin:0;
+  font-size:18px;
+  font-weight:700;
+}
+.step-item p{
+  margin:6px 0 0;
+  font-size:14px;
+  color:#7a7a7a;
+  line-height:1.4;
+}
+.arrow{
+  text-align:center;
+  font-size:28px;
+  color:#cfcfcf;
+  padding:6px 0;
+}
+.arrow.active{
+  background:#16c172;
+  color:#fff;
+  border-radius:50%;
+  width:40px;
+  height:40px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.step-item.highlight{
+  background:#16c172;
+  color:#fff;
+}
+.step-item.highlight h3,
+.step-item.highlight p{
+  color:#fff;
+}
+
+/* FOOTER */
 .footer{
   background:#1d1d2e;
   color:#fff;
@@ -144,12 +202,12 @@ button:active{transform:scale(0.96)}
   margin-top:30px;
   border-radius:22px 22px 0 0;
 }
-.footer p{font-size:13px;color:#ccc}
+.footer p{font-size:13px;color:#ccc; margin:4px 0;}
 
-/* ============ FLOAT BUTTONS ============ */
+/* FLOAT BUTTONS */
 .fab-wrap{
   position:fixed;
-  bottom:20px;
+  bottom:calc(20px + env(safe-area-inset-bottom));
   right:20px;
   display:flex;
   flex-direction:column;
@@ -168,73 +226,10 @@ button:active{transform:scale(0.96)}
   text-decoration:none;
   box-shadow:0 6px 15px rgba(0,0,0,.3);
 }
-.call{background:#0aa764}
-.whatsapp{background:#25D366}
+.call{background:#0aa764;}
+.whatsapp{background:#25D366;}
 </style>
 </head>
-
-  .steps-card{
-  max-width:420px;
-  margin:30px auto;
-  background:#fff;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
-}
-
-.step-item{
-  display:flex;
-  gap:14px;
-  padding:20px;
-  align-items:flex-start;
-}
-
-.step-item .icon{
-  font-size:34px;
-  color:#16c172;
-}
-
-.step-item h3{
-  margin:0;
-  font-size:18px;
-  font-weight:700;
-}
-
-.step-item p{
-  margin:6px 0 0;
-  font-size:14px;
-  color:#7a7a7a;
-  line-height:1.4;
-}
-
-.arrow{
-  text-align:center;
-  font-size:28px;
-  color:#cfcfcf;
-  padding:6px 0;
-}
-
-.arrow.active{
-  background:#16c172;
-  color:#fff;
-  border-radius:50%;
-  width:40px;
-  height:40px;
-  margin:0 auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.step-item.highlight{
-  background:#16c172;
-  color:#fff;
-}
-
-.step-item.highlight h3,
-.step-item.highlight p{
-  color:#fff;
-}
 <body>
 
 <!-- TOPBAR -->
@@ -249,7 +244,7 @@ button:active{transform:scale(0.96)}
   <button id="langBtn" class="lang-btn">EN</button>
 </div>
 
-<!-- MAIN -->
+<!-- MAIN CARD -->
 <div class="card">
   <div class="hero" id="heroText">ක්ෂණික මුදල් රු.500,000 දක්වා</div>
 
@@ -282,7 +277,8 @@ button:active{transform:scale(0.96)}
   <button class="apply" id="applyBtn">අයදුම් කරන්න</button>
 </div>
 
-  <section class="steps-card">
+<!-- STEPS -->
+<section class="steps-card">
   <div class="step-item">
     <div class="icon">👆</div>
     <div class="text">
@@ -290,9 +286,7 @@ button:active{transform:scale(0.96)}
       <p>Complete registration documents as instructed</p>
     </div>
   </div>
-
   <div class="arrow">⌄</div>
-
   <div class="step-item">
     <div class="icon">💰</div>
     <div class="text">
@@ -300,9 +294,7 @@ button:active{transform:scale(0.96)}
       <p>Get the results the same day after completing the application</p>
     </div>
   </div>
-
   <div class="arrow active">⌄</div>
-
   <div class="step-item highlight">
     <div class="icon">💵</div>
     <div class="text">
@@ -310,28 +302,22 @@ button:active{transform:scale(0.96)}
       <p>Get money into your bank account</p>
     </div>
   </div>
-</section><section class="steps-card">
-  <div class="step-item">
-    <div class="icon">👆</div>
-    <div class="text">
-      <h3>Fill out the application form</h3>
-      <p>Complete registration documents as instructed</p>
-    </div>
-  </div>
+</section>
 
- <!-- FOOTER -->
+<!-- FOOTER -->
 <div class="footer">
   <p>📞 074 043 6005</p>
   <p>⏰ උදෑසන 9.00 – රාත්‍රී 9.00</p>
-  <p>© 2025 eZycredit Pvt Ltd</p>
+  <p>©️ 2025 eZycredit Pvt Ltd</p>
 </div>
 
-<!-- FLOAT -->
+<!-- FLOAT BUTTONS -->
 <div class="fab-wrap">
-  <a href="tel:0740436005" class="fab call">📞</a>
-  <a href="https://wa.me/94740436005" class="fab whatsapp">💬</a>
+  <a href="tel:0740436005" class="fab call" aria-label="Call">📞</a>
+  <a href="https://wa.me/94740436005" class="fab whatsapp" aria-label="WhatsApp">💬</a>
 </div>
 
+<!-- JS -->
 <script>
 /* ===== SMOOTH NUMBER ANIMATION ===== */
 function animateValue(el, start, end, duration=200){
@@ -360,7 +346,6 @@ function calc(v){
  let t=Math.round(v*1.10); // 10% interest
 
  amt.innerText=v.toLocaleString();
-
  animateValue(monthly,prevMonthly,Math.round(t/n));
  animateValue(total,prevTotal,t);
 
@@ -374,14 +359,14 @@ r.addEventListener("input",()=>calc(+r.value));
 calc(30000);
 
 /* ===== APPLY BUTTON ===== */
-document.getElementById("applyBtn").onclick=()=>{
- const b=applyBtn;
- b.innerText="Processing...";
- b.disabled=true;
+const applyBtn = document.getElementById("applyBtn");
+applyBtn.onclick = () => {
+ applyBtn.innerText = "Processing...";
+ applyBtn.disabled = true;
  setTimeout(()=>{
    window.open("https://forms.gle/axZ8a9Uje5NqNFmcA");
-   b.innerText="අයදුම් කරන්න";
-   b.disabled=false;
+   applyBtn.innerText = lang === "si" ? "අයදුම් කරන්න" : "Apply Now";
+   applyBtn.disabled = false;
  },700);
 };
 
@@ -408,18 +393,25 @@ const t={
  }
 };
 
-langBtn.onclick=()=>{
- lang=lang==="si"?"en":"si";
- heroText.innerText=t[lang].hero;
- applyBtn.innerText=t[lang].apply;
- loanLabel.innerText=t[lang].loan;
- monLabel.innerText=t[lang].mon;
- insLabel.innerText=t[lang].ins;
- totLabel.innerText=t[lang].tot;
- subtitle.innerText=t[lang].sub;
- langBtn.innerText=lang==="si"?"EN":"සිං";
+const langBtn = document.getElementById("langBtn");
+const heroText = document.getElementById("heroText");
+const loanLabel = document.getElementById("loanLabel");
+const monLabel = document.getElementById("monLabel");
+const insLabel = document.getElementById("insLabel");
+const totLabel = document.getElementById("totLabel");
+const subtitle = document.getElementById("subtitle");
+
+langBtn.onclick = () => {
+ lang = lang === "si" ? "en" : "si";
+ heroText.innerText = t[lang].hero;
+ applyBtn.innerText = t[lang].apply;
+ loanLabel.innerText = t[lang].loan;
+ monLabel.innerText = t[lang].mon;
+ insLabel.innerText = t[lang].ins;
+ totLabel.innerText = t[lang].tot;
+ subtitle.innerText = t[lang].sub;
+ langBtn.innerText = lang==="si"?"EN":"සිං";
 };
 </script>
-
 </body>
 </html>
