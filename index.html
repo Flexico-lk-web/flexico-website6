@@ -2,134 +2,159 @@
 <html lang="si">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>eZycredit App</title>
 
-<!-- APP LIKE VIEW -->
-<meta name="theme-color" content="#0aa764">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="eZycredit">
-
 <style>
-*{
+:root{
+  --green:#16c172;
+  --dark:#0aa764;
+  --bg:#f4f8f8;
+  --card:#ffffff;
+  --muted:#8b98a0;
+}
+
+/* ===== Global ===== */
+*{box-sizing:border-box}
+html,body{
   margin:0;
   padding:0;
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-  font-family:Segoe UI, sans-serif;
+  background:var(--bg);
+  font-family:"Segoe UI",Roboto,"Noto Sans Sinhala",sans-serif;
+  overscroll-behavior:none;
 }
-
 body{
-  background:#f4faf7;
-}
-
-/* APP WRAPPER */
-.app{
   max-width:420px;
   margin:auto;
-  min-height:100vh;
 }
 
-/* HEADER */
-.header{
+/* ===== Top Bar ===== */
+.topbar{
+  position:sticky;
+  top:0;
+  background:#fff;
   display:flex;
+  justify-content:space-between;
   align-items:center;
-  padding:16px;
+  padding:12px;
+  box-shadow:0 3px 10px rgba(0,0,0,.05);
+  z-index:100;
 }
 .logo{
-  width:46px;
-  height:46px;
-  background:linear-gradient(135deg,#16c172,#0aa764);
-  border-radius:14px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.logo-box{
+  width:42px;
+  height:42px;
+  background:linear-gradient(135deg,var(--green),var(--dark));
   color:#fff;
+  border-radius:10px;
   display:flex;
   align-items:center;
   justify-content:center;
   font-weight:800;
 }
-.brand{
-  margin-left:10px;
-}
-.brand b{font-size:18px;}
-.brand span{font-size:12px;color:#6b7f77;}
-
-/* CARD */
-.card{
-  background:#fff;
-  margin:14px;
-  padding:18px;
-  border-radius:20px;
-  box-shadow:0 12px 30px rgba(0,0,0,.08);
-}
-.hero{
-  background:linear-gradient(90deg,#16c172,#0aa764);
-  color:#fff;
-  padding:16px;
-  border-radius:16px;
-  text-align:center;
+.logo-text{
   font-weight:800;
 }
-
-/* RANGE */
-.range{
-  margin-top:18px;
+.sub{
+  font-size:12px;
+  color:var(--muted);
 }
-.range label{
+
+/* ===== Cards ===== */
+.card{
+  background:var(--card);
+  margin:14px;
+  padding:16px;
+  border-radius:14px;
+  box-shadow:0 10px 25px rgba(0,0,0,.05);
+}
+
+/* ===== Hero ===== */
+.hero{
+  background:linear-gradient(90deg,var(--green),var(--dark));
+  color:#fff;
+  padding:20px;
+  text-align:center;
+  border-radius:12px;
+  font-weight:700;
+}
+
+/* ===== Slider ===== */
+.range{
+  width:100%;
+}
+.amount{
   display:flex;
   justify-content:space-between;
-  font-weight:600;
+  font-weight:700;
+  margin-top:10px;
 }
 input[type=range]{
   width:100%;
-  margin:12px 0;
 }
 
-/* GRID */
-.grid{
+/* ===== Results ===== */
+.results{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
+  gap:10px;
+  margin-top:15px;
 }
 .box{
-  background:#f1f8f5;
-  padding:12px;
-  border-radius:14px;
+  background:#f6faf8;
+  padding:10px;
+  border-radius:10px;
 }
-.box span{
+.label{
   font-size:12px;
-  color:#6b7f77;
+  color:var(--muted);
 }
-.box b{
-  font-size:16px;
+.value{
+  font-weight:800;
 }
 
-/* BUTTON */
+/* ===== Button ===== */
 .apply{
+  margin-top:15px;
   width:100%;
-  margin-top:18px;
-  padding:16px;
-  border:none;
-  border-radius:16px;
-  background:linear-gradient(90deg,#16c172,#0aa764);
+  padding:14px;
+  background:linear-gradient(90deg,var(--green),var(--dark));
   color:#fff;
+  border:none;
+  border-radius:12px;
   font-size:16px;
   font-weight:800;
 }
 
-/* FLOATING */
-.floating{
+/* ===== Footer ===== */
+.footer{
+  background:#1d1d2e;
+  color:#fff;
+  padding:25px 16px 80px;
+  margin-top:30px;
+  border-radius:20px 20px 0 0;
+}
+.footer p{
+  font-size:13px;
+  color:#ccc;
+}
+
+/* ===== Floating Buttons ===== */
+.fab-wrap{
   position:fixed;
-  right:18px;
-  bottom:18px;
+  bottom:20px;
+  right:20px;
   display:flex;
   flex-direction:column;
   gap:12px;
 }
 .fab{
-  width:56px;
-  height:56px;
+  width:55px;
+  height:55px;
   border-radius:50%;
   display:flex;
   align-items:center;
@@ -137,81 +162,119 @@ input[type=range]{
   font-size:24px;
   color:#fff;
   text-decoration:none;
-  box-shadow:0 6px 15px rgba(0,0,0,.35);
+  box-shadow:0 6px 15px rgba(0,0,0,.3);
+  animation:pulse 1.6s infinite;
 }
-.call{background:#0aa764;}
-.whatsapp{background:#25D366;}
+.call{background:#0aa764}
+.whatsapp{background:#25D366}
+
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.08)}
+  100%{transform:scale(1)}
+}
+
+/* ===== Scroll Animation ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:.6s;
+}
+.reveal.active{
+  opacity:1;
+  transform:none;
+}
 </style>
 </head>
 
 <body>
 
-<div class="app">
-
-  <div class="header">
-    <div class="logo">EZ</div>
-    <div class="brand">
-      <b>eZycredit</b><br>
-      <span>ඔබේ මුදල් සවන්ද</span>
+<!-- Top -->
+<div class="topbar">
+  <div class="logo">
+    <div class="logo-box">eZ</div>
+    <div>
+      <div class="logo-text">eZycredit</div>
+      <div class="sub">ඔබේ විශ්වාසදායක ණය සහකරු</div>
     </div>
   </div>
-
-  <div class="card">
-    <div class="hero">ක්ෂණික මුදල් – රු. 500,000 දක්වා</div>
-
-    <div class="range">
-      <label>
-        <span>ණය මුදල</span>
-        <span>රු <b id="amtTxt">30,000</b></span>
-      </label>
-      <input type="range" id="amount" min="30000" max="500000" step="10000" value="30000">
-    </div>
-
-    <div class="grid">
-      <div class="box"><span>පොලී</span><br><b>7%</b></div>
-      <div class="box"><span>වාරික</span><br><b id="months">-</b></div>
-      <div class="box"><span>මාසික ගෙවීම</span><br><b id="monthly">0</b></div>
-      <div class="box"><span>මුළු මුදල</span><br><b id="total">0</b></div>
-    </div>
-
-    <button id="applyBtn" class="apply">
-      අයදුම් කරන්න
-    </button>
-  </div>
-
 </div>
 
-<div class="floating">
+<!-- Main Card -->
+<div class="card reveal">
+  <div class="hero">ක්ෂණික මුදල් රු.500,000 දක්වා</div>
+
+  <div class="amount">
+    <span>ණය මුදල</span>
+    <span>රු <span id="amt">30,000</span></span>
+  </div>
+
+  <input type="range" min="30000" max="500000" step="10000" value="30000" id="range">
+
+  <div class="results">
+    <div class="box">
+      <div class="label">පොලී</div>
+      <div class="value">7%</div>
+    </div>
+    <div class="box">
+      <div class="label">මාසික වාරිකය</div>
+      <div class="value" id="monthly">රු 0</div>
+    </div>
+    <div class="box">
+      <div class="label">වාරික</div>
+      <div class="value" id="months">-</div>
+    </div>
+    <div class="box">
+      <div class="label">මුළු ගෙවීම</div>
+      <div class="value" id="total">රු 0</div>
+    </div>
+  </div>
+
+  <button class="apply" onclick="window.open('https://forms.gle/axZ8a9Uje5NqNFmcA')">
+    අයදුම් කරන්න
+  </button>
+</div>
+
+<!-- Footer -->
+<div class="footer reveal">
+  <p>📞 074 043 6005</p>
+  <p>⏰ උදෑසන 9.00 – රාත්‍රී 9.00</p>
+  <p>© 2025 eZycredit Pvt Ltd</p>
+</div>
+
+<!-- Floating Buttons -->
+<div class="fab-wrap">
   <a href="tel:0740436005" class="fab call">📞</a>
   <a href="https://wa.me/94740436005" class="fab whatsapp">💬</a>
 </div>
 
 <script>
-const amount=document.getElementById("amount");
-const amtTxt=document.getElementById("amtTxt");
+const r=document.getElementById("range");
+const amt=document.getElementById("amt");
 const monthly=document.getElementById("monthly");
 const total=document.getElementById("total");
 const months=document.getElementById("months");
-const applyBtn=document.getElementById("applyBtn");
 
 function calc(v){
-  let m=v<70000?4:v<120000?12:v<200000?16:24;
-  let t=v+(v*0.07);
-  amtTxt.innerText=v.toLocaleString();
-  monthly.innerText="රු "+Math.round(t/m).toLocaleString();
-  total.innerText="රු "+Math.round(t).toLocaleString();
-  months.innerText=m+" වාරික";
+ let n= v<70000?4:v<120000?12:v<200000?16:24;
+ let t=v*1.07;
+ monthly.innerText="රු "+Math.round(t/n).toLocaleString();
+ total.innerText="රු "+Math.round(t).toLocaleString();
+ months.innerText=n+" මාස";
+ amt.innerText=v.toLocaleString();
 }
-amount.oninput=()=>calc(+amount.value);
+r.oninput=()=>calc(+r.value);
 calc(30000);
 
-/* WORKING HOURS */
-const h=new Date().getHours();
-if(h<9||h>=21){
-  applyBtn.disabled=true;
-  applyBtn.innerText="සේවාව 9AM – 9PM";
-  applyBtn.style.opacity=.6;
-}
+/* scroll reveal */
+const els=document.querySelectorAll(".reveal");
+window.addEventListener("scroll",()=>{
+ els.forEach(e=>{
+  if(e.getBoundingClientRect().top<window.innerHeight-60){
+    e.classList.add("active");
+  }
+ });
+});
 </script>
 
 </body>
