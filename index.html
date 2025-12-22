@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>eZycredit App</title>
-<meta name="theme-color" content="#16c172">
-
+<title>eZycredit App - Step Image Animation</title>
 <style>
 :root{
   --green:#16c172;
@@ -14,129 +12,16 @@
   --card:#ffffff;
   --muted:#8b98a0;
 }
-*{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
 body{
   margin:0;
   font-family:"Segoe UI","Noto Sans Sinhala",sans-serif;
   background:var(--bg);
   max-width:420px;
   margin:auto;
-  padding-top:env(safe-area-inset-top);
-  padding-bottom:env(safe-area-inset-bottom);
-  overscroll-behavior: none;
+  padding:20px;
 }
 
-/* TOPBAR */
-.topbar{
-  position:sticky;
-  top:0;
-  background:#fff;
-  padding:12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 3px 10px rgba(0,0,0,.05);
-  z-index:100;
-}
-.logo{
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
-.logo-box{
-  width:42px;
-  height:42px;
-  background:linear-gradient(135deg,var(--green),var(--dark));
-  color:#fff;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:800;
-}
-.logo-text{font-weight:800;}
-.sub{font-size:12px;color:var(--muted);}
-.lang-btn{
-  border:none;
-  background:#f1f5f4;
-  padding:6px 14px;
-  border-radius:20px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-/* CARD */
-.card{
-  background:var(--card);
-  margin:14px;
-  padding:16px;
-  border-radius:16px;
-  box-shadow:0 10px 25px rgba(0,0,0,.06);
-}
-
-/* HERO */
-.hero{
-  background:linear-gradient(90deg,var(--green),var(--dark));
-  color:#fff;
-  padding:22px;
-  border-radius:14px;
-  text-align:center;
-  font-weight:800;
-  font-size:16px;
-}
-
-/* SLIDER */
-.amount{
-  display:flex;
-  justify-content:space-between;
-  font-weight:700;
-  margin:14px 0 6px;
-}
-input[type=range]{width:100%;}
-input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none;
-  width:26px;
-  height:26px;
-  border-radius:50%;
-  background:#fff;
-  border:6px solid var(--dark);
-}
-
-/* RESULTS */
-.results{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:14px;
-}
-.box{
-  background:#f6faf8;
-  padding:10px;
-  border-radius:10px;
-}
-.label{font-size:12px;color:var(--muted);}
-.value{
-  font-weight:800;
-  transition:all .25s ease;
-}
-
-/* BUTTON */
-.apply{
-  margin-top:16px;
-  width:100%;
-  padding:14px;
-  background:linear-gradient(90deg,var(--green),var(--dark));
-  color:#fff;
-  border:none;
-  border-radius:14px;
-  font-size:16px;
-  font-weight:800;
-  cursor:pointer;
-}
-button:active{transform:scale(0.96);}
-
-/* STEPS */
+/* STEPS CARD */
 .steps-card{
   max-width:420px;
   margin:30px auto;
@@ -154,6 +39,7 @@ button:active{transform:scale(0.96);}
   opacity:0;
   transform:translateY(20px);
   transition: all 0.6s ease;
+  position: relative; /* image positioning */
 }
 .step-item.show{
   opacity:1;
@@ -174,116 +60,33 @@ button:active{transform:scale(0.96);}
   color:#7a7a7a;
   line-height:1.4;
 }
+
+/* SPECIAL STEP IMAGE */
+.step-item.special-step .step-selection{
+  width: 80px;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%) translateX(20px); /* slightly shifted */
+  opacity: 0; /* hidden initially */
+  transition: all 0.6s ease;
+}
+.step-item.special-step.show .step-selection{
+  transform: translateY(-50%) translateX(0);
+  opacity:1;
+}
+
+/* optional arrow styling */
 .arrow{
   text-align:center;
   font-size:28px;
   color:#cfcfcf;
   padding:6px 0;
 }
-.arrow.active{
-  background:#16c172;
-  color:#fff;
-  border-radius:50%;
-  width:40px;
-  height:40px;
-  margin:0 auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.step-item.highlight{
-  background:#16c172;
-  color:#fff;
-}
-.step-item.highlight h3,
-.step-item.highlight p{
-  color:#fff;
-}
-
-/* FOOTER */
-.footer{
-  background:#1d1d2e;
-  color:#fff;
-  padding:26px 16px 90px;
-  margin-top:30px;
-  border-radius:22px 22px 0 0;
-}
-.footer p{font-size:13px;color:#ccc; margin:4px 0;}
-
-/* FLOAT BUTTONS */
-.fab-wrap{
-  position:fixed;
-  bottom:calc(20px + env(safe-area-inset-bottom));
-  right:20px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  z-index:200;
-}
-.fab{
-  width:56px;
-  height:56px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:24px;
-  color:#fff;
-  text-decoration:none;
-  box-shadow:0 6px 15px rgba(0,0,0,.3);
-}
-.call{background:#0aa764;}
-.whatsapp{background:#25D366;}
 </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
-<div class="topbar">
-  <div class="logo">
-    <div class="logo-box">eZ</div>
-    <div>
-      <div class="logo-text">eZycredit</div>
-      <div class="sub" id="subtitle">ඔබේ විශ්වාසදායක ණය සහකරු</div>
-    </div>
-  </div>
-  <button id="langBtn" class="lang-btn">EN</button>
-</div>
-
-<!-- MAIN CARD -->
-<div class="card">
-  <div class="hero" id="heroText">ක්ෂණික මුදල් රු.500,000 දක්වා</div>
-
-  <div class="amount">
-    <span id="loanLabel">ණය මුදල</span>
-    <span>රු <span id="amt">30,000</span></span>
-  </div>
-
-  <input type="range" min="30000" max="500000" step="10000" value="30000" id="range">
-
-  <div class="results">
-    <div class="box">
-      <div class="label">පොලී</div>
-      <div class="value">10%</div>
-    </div>
-    <div class="box">
-      <div class="label" id="monLabel">මාසික වාරිකය</div>
-      <div class="value" id="monthly">රු 0</div>
-    </div>
-    <div class="box">
-      <div class="label" id="insLabel">වාරික</div>
-      <div class="value" id="months">-</div>
-    </div>
-    <div class="box">
-      <div class="label" id="totLabel">මුළු ගෙවීම</div>
-      <div class="value" id="total">රු 0</div>
-    </div>
-  </div>
-
-  <button class="apply" id="applyBtn">අයදුම් කරන්න</button>
-</div>
-
-<!-- STEPS -->
 <section class="steps-card">
   <div class="step-item">
     <div class="icon">👆</div>
@@ -293,15 +96,20 @@ button:active{transform:scale(0.96);}
     </div>
   </div>
   <div class="arrow">⌄</div>
-  <div class="step-item">
+
+  <!-- SPECIAL STEP WITH IMAGE -->
+  <div class="step-item special-step">
     <div class="icon">💰</div>
     <div class="text">
       <h3>Wait for review results</h3>
       <p>Get the results the same day after completing the application</p>
     </div>
+    <!-- This image will animate in on scroll -->
+    <img src="https://via.placeholder.com/80" alt="Selection" class="step-selection">
   </div>
-  <div class="arrow active">⌄</div>
-  <div class="step-item highlight">
+  <div class="arrow">⌄</div>
+
+  <div class="step-item">
     <div class="icon">💵</div>
     <div class="text">
       <h3>Receive a loan</h3>
@@ -310,127 +118,23 @@ button:active{transform:scale(0.96);}
   </div>
 </section>
 
-<!-- FOOTER -->
-<div class="footer">
-  <p>📞 074 043 6005</p>
-  <p>⏰ උදෑසන 9.00 – රාත්‍රී 9.00</p>
-  <p>©️ 2025 eZycredit Pvt Ltd</p>
-</div>
-
-<!-- FLOAT BUTTONS -->
-<div class="fab-wrap">
-  <a href="tel:0740436005" class="fab call" aria-label="Call">📞</a>
-  <a href="https://wa.me/94740436005" class="fab whatsapp" aria-label="WhatsApp">💬</a>
-</div>
-
 <script>
-/* ===== ANIMATE NUMBERS ===== */
-function animateValue(el, start, end, duration=200){
-  let startTime=null;
-  function anim(t){
-    if(!startTime) startTime=t;
-    let p=Math.min((t-startTime)/duration,1);
-    let v=Math.floor(start+(end-start)*p);
-    el.innerText="රු "+v.toLocaleString();
-    if(p<1) requestAnimationFrame(anim);
-  }
-  requestAnimationFrame(anim);
-}
-
-/* ===== CALCULATOR ===== */
-const r=document.getElementById("range");
-const amt=document.getElementById("amt");
-const monthly=document.getElementById("monthly");
-const total=document.getElementById("total");
-const months=document.getElementById("months");
-
-let prevMonthly=0, prevTotal=0;
-
-function calc(v){
- let n=v<70000?4:v<120000?12:v<200000?16:24;
- let t=Math.round(v*1.10); // 10% interest
-
- amt.innerText=v.toLocaleString();
- animateValue(monthly,prevMonthly,Math.round(t/n));
- animateValue(total,prevTotal,t);
-
- prevMonthly=Math.round(t/n);
- prevTotal=t;
-
- months.innerText=n+" මාස";
-}
-
-r.addEventListener("input",()=>calc(+r.value));
-calc(30000);
-
-/* ===== APPLY BUTTON ===== */
-const applyBtn = document.getElementById("applyBtn");
-applyBtn.onclick = () => {
- applyBtn.innerText = "Processing...";
- applyBtn.disabled = true;
- setTimeout(()=>{
-   window.open("https://forms.gle/axZ8a9Uje5NqNFmcA");
-   applyBtn.innerText = lang === "si" ? "අයදුම් කරන්න" : "Apply Now";
-   applyBtn.disabled = false;
- },700);
-};
-
-/* ===== LANGUAGE ===== */
-let lang="si";
-const t={
- si:{
-  hero:"ක්ෂණික මුදල් රු.500,000 දක්වා",
-  apply:"අයදුම් කරන්න",
-  loan:"ණය මුදල",
-  mon:"මාසික වාරිකය",
-  ins:"වාරික",
-  tot:"මුළු ගෙවීම",
-  sub:"ඔබේ විශ්වාසදායක ණය සහකරු"
- },
- en:{
-  hero:"Instant Loans up to Rs.500,000",
-  apply:"Apply Now",
-  loan:"Loan Amount",
-  mon:"Monthly Payment",
-  ins:"Installments",
-  tot:"Total Payable",
-  sub:"Your trusted loan partner"
- }
-};
-
-const langBtn = document.getElementById("langBtn");
-const heroText = document.getElementById("heroText");
-const loanLabel = document.getElementById("loanLabel");
-const monLabel = document.getElementById("monLabel");
-const insLabel = document.getElementById("insLabel");
-const totLabel = document.getElementById("totLabel");
-const subtitle = document.getElementById("subtitle");
-
-langBtn.onclick = () => {
- lang = lang === "si" ? "en" : "si";
- heroText.innerText = t[lang].hero;
- applyBtn.innerText = t[lang].apply;
- loanLabel.innerText = t[lang].loan;
- monLabel.innerText = t[lang].mon;
- insLabel.innerText = t[lang].ins;
- totLabel.innerText = t[lang].tot;
- subtitle.innerText = t[lang].sub;
- langBtn.innerText = lang==="si"?"EN":"සිං";
-};
-
-/* ===== STEP ITEMS SCROLL ANIMATION ===== */
+// Select all step-items
 const steps = document.querySelectorAll('.step-item');
+
 function checkSteps(){
   const triggerBottom = window.innerHeight * 0.9;
   steps.forEach(step => {
     const stepTop = step.getBoundingClientRect().top;
     if(stepTop < triggerBottom){
-      step.classList.add('show');
+      step.classList.add('show'); // fade/slide animation
     }
   });
 }
+
 window.addEventListener('scroll', checkSteps);
 window.addEventListener('load', checkSteps);
 </script>
+
 </body>
 </html>
