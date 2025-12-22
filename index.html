@@ -84,6 +84,17 @@ body{
   text-align:center;
   font-weight:800;
   font-size:16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.hero-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 12px;
 }
 
 /* SLIDER */
@@ -200,6 +211,20 @@ button:active{transform:scale(0.96);}
   color:#fff;
 }
 
+/* MIDDLE IMAGE */
+.middle-image {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+.middle-image img {
+  width: 90%;
+  max-width: 350px;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
 /* FOOTER */
 .footer{
   background:#1d1d2e;
@@ -252,7 +277,10 @@ button:active{transform:scale(0.96);}
 
 <!-- MAIN CARD -->
 <div class="card">
-  <div class="hero" id="heroText">ක්ෂණික මුදල් රු.500,000 දක්වා</div>
+  <div class="hero" id="heroText">
+    <img src="https://via.placeholder.com/80" alt="Loan Icon" class="hero-img">
+    <span>ක්ෂණික මුදල් රු.500,000 දක්වා</span>
+  </div>
 
   <div class="amount">
     <span id="loanLabel">ණය මුදල</span>
@@ -309,6 +337,11 @@ button:active{transform:scale(0.96);}
     </div>
   </div>
 </section>
+
+<!-- MIDDLE IMAGE -->
+<div class="middle-image">
+  <img src="https://via.placeholder.com/300x100" alt="Promotional Image">
+</div>
 
 <!-- FOOTER -->
 <div class="footer">
@@ -408,7 +441,7 @@ const subtitle = document.getElementById("subtitle");
 
 langBtn.onclick = () => {
  lang = lang === "si" ? "en" : "si";
- heroText.innerText = t[lang].hero;
+ heroText.querySelector('span').innerText = t[lang].hero;
  applyBtn.innerText = t[lang].apply;
  loanLabel.innerText = t[lang].loan;
  monLabel.innerText = t[lang].mon;
