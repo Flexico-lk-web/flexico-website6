@@ -31,6 +31,7 @@ body{
   justify-content:space-between;
   align-items:center;
   box-shadow:0 3px 10px rgba(0,0,0,.05);
+  z-index: 10;
 }
 .logo{
   display:flex;
@@ -65,6 +66,8 @@ body{
   border-radius:16px;
   box-shadow:0 10px 25px rgba(0,0,0,.06);
 }
+
+/* HERO */
 .hero{
   background:linear-gradient(90deg,var(--green),var(--dark));
   color:#fff;
@@ -143,6 +146,65 @@ input[type=range]::-webkit-slider-thumb{
   cursor:pointer;
 }
 button:active{transform:scale(0.96);}
+
+/* LOAN STEPS */
+.loan-steps h3{
+  margin-bottom:10px;
+  color: var(--dark);
+}
+.loan-steps .step{
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.5s ease;
+  padding:10px 0;
+  border-bottom:1px solid #eee;
+}
+.loan-steps .step.show{
+  opacity:1;
+  transform: translateX(0);
+}
+
+/* IMAGE SECTION */
+.image-section img{
+  width:100%;
+  border-radius:12px;
+  opacity:0;
+  transform: scale(0.95);
+  transition: all 0.5s ease;
+}
+.image-section.show img{
+  opacity:1;
+  transform: scale(1);
+}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid #eee; cursor:pointer; padding:8px 0;}
+.faq-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.3s ease;
+  color: var(--muted);
+}
+.faq-item.open .faq-content{
+  max-height:200px;
+}
+.faq-title{font-weight:700;}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:20px;
+  background:#f1f5f4;
+  margin-top:20px;
+  font-size:14px;
+  opacity:0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+}
+footer.show{
+  opacity:1;
+  transform: translateY(0);
+}
 </style>
 </head>
 <body>
@@ -158,6 +220,7 @@ button:active{transform:scale(0.96);}
   <button id="langBtn" class="lang-btn">EN</button>
 </div>
 
+<!-- Loan Calculator Card -->
 <div class="card">
   <div class="hero" id="heroText">
     ක්ෂණික මුදල් රු.500,000 දක්වා
@@ -209,7 +272,38 @@ button:active{transform:scale(0.96);}
   <button class="apply">අයදුම් කරන්න</button>
 </div>
 
+<!-- Loan Steps Section -->
+<div class="loan-steps card">
+  <h3>ණය ලබාගැනීමේ පියවර</h3>
+  <div class="step">1. අයදුම්පත පිරවීම</div>
+  <div class="step">2. ලේඛන වලට අනුමැතිය</div>
+  <div class="step">3. ගිණුමට මුදල් ලබා දීම</div>
+</div>
+
+<!-- Image Section -->
+<div class="image-section card">
+  <img src="https://via.placeholder.com/400x200" alt="Loan Example">
+</div>
+
+<!-- FAQ Section -->
+<div class="faq card">
+  <div class="faq-item">
+    <div class="faq-title">ප්‍රශ්නය 1: පොලී අනුපාතය කීයද?</div>
+    <div class="faq-content">මෙම ණය සඳහා මාසික පොලී අනුපාතය 0.833% වේ.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-title">ප්‍රශ්නය 2: ගෙවීම් ක්‍රමය කුමක්ද?</div>
+    <div class="faq-content">මාසිකව වාරික විදිහට ගෙවිය හැක.</div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  © 2025 eZycredit. සියලු හිමිකම් ඇවිරිණි. | <a href="#">Contact Us</a> | <a href="#">Privacy Policy</a>
+</footer>
+
 <script>
+/* Loan Calculator Logic */
 const amountRange = document.getElementById("amountRange");
 const monthRange = document.getElementById("monthRange");
 
@@ -249,6 +343,42 @@ function calc(){
 amountRange.oninput = calc;
 monthRange.oninput = calc;
 calc();
+
+/* Loan Steps Animation */
+const steps = document.querySelectorAll(".loan-steps .step");
+window.addEventListener("scroll", ()=>{
+  steps.forEach(step=>{
+    const rect = step.getBoundingClientRect();
+    if(rect.top < window.innerHeight - 50){
+      step.classList.add("show");
+    }
+  });
+});
+
+/* Image Animation */
+const imgSection = document.querySelector(".image-section");
+window.addEventListener("scroll", ()=>{
+  const rect = imgSection.getBoundingClientRect();
+  if(rect.top < window.innerHeight - 50){
+    imgSection.classList.add("show");
+  }
+});
+
+/* FAQ Expandable */
+document.querySelectorAll(".faq-item").forEach(item=>{
+  item.querySelector(".faq-title").addEventListener("click", ()=>{
+    item.classList.toggle("open");
+  });
+});
+
+/* Footer Animation */
+const footer = document.querySelector("footer");
+window.addEventListener("scroll", ()=>{
+  const rect = footer.getBoundingClientRect();
+  if(rect.top < window.innerHeight){
+    footer.classList.add("show");
+  }
+});
 </script>
 
 </body>
