@@ -2,144 +2,211 @@
 <html lang="si">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Loan Calculator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>eZycredit App - Loan Calculator</title>
+<meta name="theme-color" content="#16c172">
 
 <style>
 :root{
- --green:#16c172;
- --dark:#0aa764;
- --bg:#f4f8f8;
- --card:#ffffff;
- --muted:#8b98a0;
+  --green:#16c172;
+  --dark:#0aa764;
+  --bg:#f4f8f8;
+  --card:#ffffff;
+  --muted:#8b98a0;
 }
 *{box-sizing:border-box;}
 body{
- margin:0;
- font-family:"Segoe UI","Noto Sans Sinhala",sans-serif;
- background:var(--bg);
+  margin:0;
+  font-family:"Segoe UI","Noto Sans Sinhala",sans-serif;
+  background:var(--bg);
+}
+
+/* TOPBAR */
+.topbar{
+  position:sticky;
+  top:0;
+  background:#fff;
+  padding:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 3px 10px rgba(0,0,0,.05);
+}
+.logo{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.logo-box{
+  width:42px;
+  height:42px;
+  background:linear-gradient(135deg,var(--green),var(--dark));
+  color:#fff;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+}
+.lang-btn{
+  border:none;
+  background:#f1f5f4;
+  padding:6px 14px;
+  border-radius:20px;
+  font-weight:700;
+  cursor:pointer;
 }
 
 /* CARD */
 .card{
- background:#fff;
- margin:16px;
- padding:18px;
- border-radius:18px;
- box-shadow:0 10px 25px rgba(0,0,0,.08);
+  background:var(--card);
+  margin:14px;
+  padding:16px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.06);
 }
 .hero{
- background:linear-gradient(90deg,var(--green),var(--dark));
- color:#fff;
- padding:18px;
- border-radius:14px;
- text-align:center;
- font-weight:800;
- font-size:16px;
+  background:linear-gradient(90deg,var(--green),var(--dark));
+  color:#fff;
+  padding:22px;
+  border-radius:14px;
+  text-align:center;
+  font-weight:800;
+  font-size:16px;
 }
 
+/* SLIDERS */
 .amount{
- display:flex;
- justify-content:space-between;
- margin-top:14px;
- font-weight:700;
+  display:flex;
+  justify-content:space-between;
+  font-weight:700;
+  margin:14px 0 6px;
 }
-input[type=range]{
- width:100%;
- margin:8px 0 14px;
+input[type=range]{width:100%;}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  background:#fff;
+  border:6px solid var(--dark);
 }
 
 /* RESULTS */
 .results{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:12px;
- margin-top:10px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:14px;
 }
 .box{
- background:#f6faf8;
- padding:12px;
- border-radius:12px;
+  background:#f6faf8;
+  padding:10px;
+  border-radius:10px;
 }
-.label{
- font-size:12px;
- color:var(--muted);
-}
+.label{font-size:12px;color:var(--muted);}
 .value{
- font-weight:800;
- font-size:15px;
+  font-weight:800;
+  transition:all .25s ease;
 }
 
 /* BREAKDOWN */
 .breakdown{
- margin-top:18px;
- background:#f9fcfb;
- padding:14px;
- border-radius:14px;
+  margin-top:16px;
+  background:#f9fcfb;
+  border-radius:12px;
+  padding:14px;
 }
 .breakdown h4{
- margin:0 0 12px;
- color:var(--dark);
+  margin:0 0 10px;
+  color:#0aa764;
 }
 .row{
- display:flex;
- justify-content:space-between;
- margin:6px 0;
- font-size:14px;
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+  margin:6px 0;
 }
-.row strong{font-weight:800;}
+.row strong{font-weight:700;}
+
+/* BUTTON */
+.apply{
+  margin-top:16px;
+  width:100%;
+  padding:14px;
+  background:linear-gradient(90deg,var(--green),var(--dark));
+  color:#fff;
+  border:none;
+  border-radius:14px;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+}
+button:active{transform:scale(0.96);}
 </style>
 </head>
-
 <body>
 
+<div class="topbar">
+  <div class="logo">
+    <div class="logo-box">eZ</div>
+    <div>
+      <div class="logo-text">eZycredit</div>
+      <div class="sub" id="subtitle">ඔබේ විශ්වාසදායක ණය සහකරු</div>
+    </div>
+  </div>
+  <button id="langBtn" class="lang-btn">EN</button>
+</div>
+
 <div class="card">
- <div class="hero">
-  Online Loan Calculator
- </div>
-
- <!-- LOAN AMOUNT -->
- <div class="amount">
-  <span>ණය මුදල</span>
-  <span>රු <span id="amt">500,000</span></span>
- </div>
- <input type="range" min="30000" max="500000" step="10000" value="500000" id="amountRange">
-
- <!-- MONTHS -->
- <div class="amount">
-  <span>කාලය</span>
-  <span><span id="mVal">12</span> මාස</span>
- </div>
- <input type="range" min="6" max="24" step="3" value="12" id="monthRange">
-
- <!-- RESULTS -->
- <div class="results">
-  <div class="box">
-   <div class="label">පොලී අනුපාතය</div>
-   <div class="value">1.1% (මාසික)<br>≈ 13.2% (වාර්ෂික)</div>
+  <div class="hero" id="heroText">
+    ක්ෂණික මුදල් රු.500,000 දක්වා
   </div>
-  <div class="box">
-   <div class="label">මාසික වාරිකය</div>
-   <div class="value" id="monthly">රු 0</div>
-  </div>
-  <div class="box">
-   <div class="label">වාරික</div>
-   <div class="value" id="months">12 මාස</div>
-  </div>
-  <div class="box">
-   <div class="label">මුළු ගෙවීම</div>
-   <div class="value" id="total">රු 0</div>
-  </div>
- </div>
 
- <!-- BREAKDOWN -->
- <div class="breakdown">
-  <h4>Finance Company Breakdown</h4>
-  <div class="row"><span>ණය මුදල</span><strong id="bLoan">රු 0</strong></div>
-  <div class="row"><span>මුළු පොලිය</span><strong id="bInterest">රු 0</strong></div>
-  <div class="row"><span>මාසික වාරිකය</span><strong id="bMonthly">රු 0</strong></div>
-  <div class="row"><span>මුළු ගෙවීම</span><strong id="bTotal">රු 0</strong></div>
- </div>
+  <!-- Loan Amount -->
+  <div class="amount">
+    <span>ණය මුදල</span>
+    <span>රු <span id="amt">500,000</span></span>
+  </div>
+  <input type="range" min="30000" max="500000" step="10000" value="500000" id="amountRange">
+
+  <!-- Months -->
+  <div class="amount">
+    <span>කාලය</span>
+    <span><span id="mVal">12</span> මාස</span>
+  </div>
+  <input type="range" min="6" max="24" step="3" value="12" id="monthRange">
+
+  <!-- Results -->
+  <div class="results">
+    <div class="box">
+      <div class="label">පොලී අනුපාතය</div>
+      <div class="value">1.1% (මාසික)<br>≈ 13.2% (වාර්ෂික)</div>
+    </div>
+    <div class="box">
+      <div class="label">මාසික වාරිකය</div>
+      <div class="value" id="monthly">රු 0</div>
+    </div>
+    <div class="box">
+      <div class="label">වාරික</div>
+      <div class="value" id="months">12 මාස</div>
+    </div>
+    <div class="box">
+      <div class="label">මුළු ගෙවීම</div>
+      <div class="value" id="total">රු 0</div>
+    </div>
+  </div>
+
+  <!-- Finance Breakdown -->
+  <div class="breakdown">
+    <h4>Finance Company Breakdown</h4>
+    <div class="row"><span>ණය මුදල</span><strong id="bLoan">රු 0</strong></div>
+    <div class="row"><span>මුළු පොලිය</span><strong id="bInterest">රු 0</strong></div>
+    <div class="row"><span>මාසික වාරිකය</span><strong id="bMonthly">රු 0</strong></div>
+    <div class="row"><span>මුළු ගෙවීම</span><strong id="bTotal">රු 0</strong></div>
+  </div>
+
+  <button class="apply">අයදුම් කරන්න</button>
 </div>
 
 <script>
@@ -158,25 +225,25 @@ const bMonthly = document.getElementById("bMonthly");
 const bTotal = document.getElementById("bTotal");
 
 function calc(){
- const P = +amountRange.value;
- const n = +monthRange.value;
- const r = 0.011; // 1.1% monthly
+  const P = +amountRange.value;
+  const n = +monthRange.value;
+  const r = 0.011; // 1.1% monthly
 
- const totalPay = Math.round(P * Math.pow(1 + r, n));
- const monthlyPay = Math.round(totalPay / n);
- const interest = totalPay - P;
+  const totalPay = Math.round(P * Math.pow(1+r, n));
+  const monthlyPay = Math.round(totalPay / n);
+  const interest = totalPay - P;
 
- amt.innerText = P.toLocaleString();
- mVal.innerText = n;
- months.innerText = n + " මාස";
+  amt.innerText = P.toLocaleString();
+  mVal.innerText = n;
+  months.innerText = n + " මාස";
 
- monthly.innerText = "රු " + monthlyPay.toLocaleString();
- total.innerText = "රු " + totalPay.toLocaleString();
+  monthly.innerText = "රු " + monthlyPay.toLocaleString();
+  total.innerText = "රු " + totalPay.toLocaleString();
 
- bLoan.innerText = "රු " + P.toLocaleString();
- bInterest.innerText = "රු " + interest.toLocaleString();
- bMonthly.innerText = "රු " + monthlyPay.toLocaleString();
- bTotal.innerText = "රු " + totalPay.toLocaleString();
+  bLoan.innerText = "රු " + P.toLocaleString();
+  bInterest.innerText = "රු " + interest.toLocaleString();
+  bMonthly.innerText = "රු " + monthlyPay.toLocaleString();
+  bTotal.innerText = "රු " + totalPay.toLocaleString();
 }
 
 amountRange.oninput = calc;
