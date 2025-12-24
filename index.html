@@ -3,39 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>eZycredit App - Loan Calculator</title>
+<title>eZycredit – Loan Calculator</title>
+
 <meta name="theme-color" content="#16c172">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 
 <style>
 :root{
+  /* COLORS */
   --green:#16c172;
-  --dark:#0aa764;
+  --green-dark:#0aa764;
+  --green-soft:#e9f7f1;
+
   --bg:#f4f8f8;
   --card:#ffffff;
-  --muted:#8b98a0;
+  --border:#e6efec;
 
-  /* ✅ FIXED MISSING COLORS */
-  --blue:#4b5f9e;
-  --text-dark:#0c1328;
+  --text-main:#0c1328;
+  --text-muted:#8b98a0;
+
+  /* FONT SIZES */
+  --fs-xs:12px;
+  --fs-sm:14px;
+  --fs-md:16px;
+  --fs-lg:18px;
+  --fs-xl:20px;
 }
+
 *{box-sizing:border-box;}
+
 body{
   margin:0;
   font-family:"Segoe UI","Noto Sans Sinhala",sans-serif;
   background:var(--bg);
+  color:var(--text-main);
+  font-size:var(--fs-md);
 }
 
-/* TOPBAR */
+/* TOP BAR */
 .topbar{
   position:sticky;
   top:0;
   background:#fff;
-  padding:12px;
+  padding:12px 14px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   box-shadow:0 3px 10px rgba(0,0,0,.05);
-  z-index: 10;
+  z-index:10;
 }
 .logo{
   display:flex;
@@ -45,22 +61,16 @@ body{
 .logo-box{
   width:42px;
   height:42px;
-  background:linear-gradient(135deg,var(--green),var(--dark));
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
   color:#fff;
-  border-radius:10px;
+  border-radius:12px;
   display:flex;
   align-items:center;
   justify-content:center;
   font-weight:800;
 }
-.lang-btn{
-  border:none;
-  background:#f1f5f4;
-  padding:6px 14px;
-  border-radius:20px;
-  font-weight:700;
-  cursor:pointer;
-}
+.logo-text{font-weight:800;}
+.sub{font-size:var(--fs-xs); color:var(--text-muted);}
 
 /* CARD */
 .card{
@@ -73,30 +83,29 @@ body{
 
 /* HERO */
 .hero{
-  background:linear-gradient(90deg,var(--green),var(--dark));
+  background:linear-gradient(90deg,var(--green),var(--green-dark));
   color:#fff;
   padding:22px;
   border-radius:14px;
   text-align:center;
   font-weight:800;
-  font-size:16px;
 }
 
-/* SLIDERS */
+/* RANGE */
 .amount{
   display:flex;
   justify-content:space-between;
   font-weight:700;
-  margin:14px 0 6px;
+  margin:16px 0 6px;
 }
 input[type=range]{width:100%;}
 input[type=range]::-webkit-slider-thumb{
   -webkit-appearance:none;
-  width:26px;
-  height:26px;
+  width:24px;
+  height:24px;
   border-radius:50%;
   background:#fff;
-  border:6px solid var(--dark);
+  border:6px solid var(--green-dark);
 }
 
 /* RESULTS */
@@ -107,12 +116,12 @@ input[type=range]::-webkit-slider-thumb{
   margin-top:14px;
 }
 .box{
-  background:#f6faf8;
-  padding:10px;
-  border-radius:10px;
+  background:var(--green-soft);
+  padding:12px;
+  border-radius:12px;
 }
-.label{font-size:12px;color:var(--muted);}
-.value{font-weight:800;}
+.label{font-size:var(--fs-xs); color:var(--text-muted);}
+.value{font-weight:800; font-size:var(--fs-md);}
 
 /* BREAKDOWN */
 .breakdown{
@@ -123,108 +132,75 @@ input[type=range]::-webkit-slider-thumb{
 }
 .breakdown h4{
   margin:0 0 10px;
-  color:var(--dark);
+  color:var(--green-dark);
 }
 .row{
   display:flex;
   justify-content:space-between;
-  font-size:14px;
   margin:6px 0;
 }
 
 /* BUTTON */
 .apply{
-  margin-top:16px;
   width:100%;
   padding:14px;
-  background:linear-gradient(90deg,var(--green),var(--dark));
+  background:linear-gradient(90deg,var(--green),var(--green-dark));
   color:#fff;
   border:none;
   border-radius:14px;
-  font-size:16px;
+  font-size:var(--fs-lg);
   font-weight:800;
   cursor:pointer;
 }
 
-/* LOAN STEPS */
-.loan-steps h3{
-  margin-bottom:10px;
-  color: var(--dark);
-}
-.loan-steps .step{
-  opacity: 0;
-  transform: translateX(-30px);
-  transition: all 0.5s ease;
-  padding:10px 0;
-  border-bottom:1px solid #eee;
-}
-.loan-steps .step.show{
-  opacity:1;
-  transform: translateX(0);
-}
-
-/* IMAGE SECTION */
-.image-section img{
-  width:100%;
-  border-radius:12px;
-  opacity:0;
-  transform: scale(0.95);
-  transition: all 0.5s ease;
-}
-.image-section.show img{
-  opacity:1;
-  transform: scale(1);
-}
-
-/* FAQ */
-.faq-item{border-bottom:1px solid #eee; cursor:pointer; padding:8px 0;}
-.faq-content{
-  max-height:0;
-  overflow:hidden;
-  transition:max-height 0.3s ease;
-  color: var(--muted);
-}
-.faq-item.open .faq-content{max-height:200px;}
-.faq-title{font-weight:700;}
-
 /* CONTACT */
 .contact-item{
   display:flex;
-  gap:16px;
-  margin-bottom:28px;
+  gap:14px;
+  align-items:center;
+  text-decoration:none;
+  margin-bottom:22px;
 }
 .icon-box{
-  width:58px;
-  height:58px;
-  background:var(--blue);
-  border-radius:16px;
+  width:52px;
+  height:52px;
+  background:var(--green-soft);
+  border-radius:14px;
   display:flex;
   align-items:center;
   justify-content:center;
 }
 .icon{
-  width:28px;
-  height:28px;
-  fill:#fff;
+  width:26px;
+  height:26px;
+  fill:var(--green-dark);
 }
-.contact-text .main-text{
-  font-size:18px;
+.main-text{
+  font-size:var(--fs-lg);
   font-weight:800;
-  color:var(--text-dark);
 }
-.contact-text .sub-text{
-  margin-top:6px;
-  font-size:15px;
-  color:var(--muted);
+.sub-text{
+  font-size:var(--fs-sm);
+  color:var(--text-muted);
 }
 
 /* FOOTER */
 footer{
   text-align:center;
-  padding:20px;
+  padding:16px;
   background:#f1f5f4;
-  font-size:14px;
+  font-size:var(--fs-sm);
   color:#7b8794;
+  line-height:1.6;
+}
+
+/* STICKY APPLY */
+.sticky{
+  position:fixed;
+  bottom:12px;
+  left:12px;
+  right:12px;
+  z-index:20;
 }
 </style>
 </head>
@@ -236,44 +212,37 @@ footer{
     <div class="logo-box">eZ</div>
     <div>
       <div class="logo-text">eZycredit</div>
-      <div class="sub" id="subtitle">ඔබේ විශ්වාසදායක ණය සහකරු</div>
+      <div class="sub">ඔබේ විශ්වාසදායක ණය සහකරු</div>
     </div>
   </div>
-  <button id="langBtn" class="lang-btn">EN</button>
 </div>
 
-<!-- Loan Calculator Card -->
 <div class="card">
-  <div class="hero" id="heroText">
-    ක්ෂණික මුදල් රු.500,000 දක්වා
-  </div>
+  <div class="hero">ක්ෂණික මුදල් රු.500,000 දක්වා</div>
 
-  <!-- Loan Amount -->
   <div class="amount">
     <span>ණය මුදල</span>
     <span>රු <span id="amt">500,000</span></span>
   </div>
   <input type="range" min="30000" max="500000" step="10000" value="500000" id="amountRange">
 
-  <!-- Months -->
   <div class="amount">
     <span>කාලය</span>
     <span><span id="mVal">12</span> මාස</span>
   </div>
   <input type="range" min="6" max="24" step="3" value="12" id="monthRange">
 
-  <!-- Results -->
   <div class="results">
     <div class="box">
-      <div class="label">පොලී අනුපාතය</div>
-      <div class="value">0.833% (මාසික)<br>≈ 10% (වාර්ෂික)</div>
+      <div class="label">මාසික පොලී</div>
+      <div class="value">0.833%</div>
     </div>
     <div class="box">
       <div class="label">මාසික වාරිකය</div>
       <div class="value" id="monthly">රු 0</div>
     </div>
     <div class="box">
-      <div class="label">වාරික</div>
+      <div class="label">කාලය</div>
       <div class="value" id="months">12 මාස</div>
     </div>
     <div class="box">
@@ -282,177 +251,83 @@ footer{
     </div>
   </div>
 
-  <!-- Finance Breakdown -->
   <div class="breakdown">
-    <h4>Finance Company Breakdown</h4>
-    <div class="row"><span>ණය මුදල</span><strong id="bLoan">රු 0</strong></div>
-    <div class="row"><span>මුළු පොලිය</span><strong id="bInterest">රු 0</strong></div>
-    <div class="row"><span>මාසික වාරිකය</span><strong id="bMonthly">රු 0</strong></div>
-    <div class="row"><span>මුළු ගෙවීම</span><strong id="bTotal">රු 0</strong></div>
-  </div>
-
-  <button class="apply">අයදුම් කරන්න</button>
-</div>
-
-<!-- Loan Steps Section -->
-<div class="loan-steps card">
-  <h3>ණය ලබාගැනීමේ පියවර</h3>
-  <div class="step">1. අයදුම්පත පිරවීම</div>
-  <div class="step">2. ලේඛන වලට අනුමැතිය</div>
-  <div class="step">3. ගිණුමට මුදල් ලබා දීම</div>
-</div>
-
-<!-- Image Section -->
-<div class="image-section card">
-  <img src="https://via.placeholder.com/400x200" alt="Loan Example">
-</div>
-
-<!-- FAQ Section -->
-<div class="faq card">
-  <div class="faq-item">
-    <div class="faq-title">ප්‍රශ්නය 1: පොලී අනුපාතය කීයද?</div>
-    <div class="faq-content">මෙම ණය සඳහා මාසික පොලී අනුපාතය 0.833% වේ.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-title">ප්‍රශ්නය 2: ගෙවීම් ක්‍රමය කුමක්ද?</div>
-    <div class="faq-content">මාසිකව වාරික විදිහට ගෙවිය හැක.</div>
+    <h4>Finance Breakdown</h4>
+    <div class="row"><span>ණය මුදල</span><strong id="bLoan"></strong></div>
+    <div class="row"><span>මුළු පොලිය</span><strong id="bInterest"></strong></div>
+    <div class="row"><span>මාසික වාරිකය</span><strong id="bMonthly"></strong></div>
+    <div class="row"><span>මුළු ගෙවීම</span><strong id="bTotal"></strong></div>
   </div>
 </div>
 
 <div class="card">
-
-  <!-- PHONE -->
-  <div class="contact-item">
-    <div class="icon-box">
-      <svg viewBox="0 0 24 24" class="icon">
-        <path d="M6.6 10.8c1.5 3 3.6 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3
-        1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.1
-        21 3 13.9 3 5c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1
-        0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8z"/>
-      </svg>
-    </div>
-    <div class="contact-text">
+  <a href="tel:+94740436005" class="contact-item">
+    <div class="icon-box">📞</div>
+    <div>
       <div class="main-text">074 043 6005</div>
-      <div class="sub-text">අමතන්න</div>
+      <div class="sub-text">Call Now</div>
     </div>
-  </div>
+  </a>
 
-  <!-- EMAIL -->
-  <div class="contact-item">
-    <div class="icon-box">
-      <svg viewBox="0 0 24 24" class="icon">
-        <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16
-        c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
-      </svg>
-    </div>
-    <div class="contact-text">
+  <a href="mailto:eZycredit@gmail.com" class="contact-item">
+    <div class="icon-box">✉️</div>
+    <div>
       <div class="main-text">eZycredit@gmail.com</div>
-      <div class="sub-text">ඊ-තැපැල් ලිපිනය</div>
+      <div class="sub-text">Email</div>
     </div>
-  </div>
-
-  <!-- TIME -->
-  <div class="contact-item">
-    <div class="icon-box">
-      <svg viewBox="0 0 24 24" class="icon">
-        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1
-        11h5v-2h-4V7h-2v6z"/>
-      </svg>
-    </div>
-    <div class="contact-text">
-      <div class="main-text">
-        සදුදා – සිකුරාදා<br>
-        පෙ.ව. 9.00 සිට ප.ව. 9.00 දක්වා
-      </div>
-    </div>
-  </div>
-
+  </a>
 </div>
 
 <footer>
-© 2019 – 2025 All Rights Reserved.<br>
-A V Business Solutions (Private) Limited
+© 2019 – 2025 A V Business Solutions (Pvt) Ltd<br>
+All Rights Reserved
 </footer>
 
+<div class="sticky">
+  <a href="https://wa.me/94740436005">
+    <button class="apply">WhatsApp හරහා අයදුම් කරන්න</button>
+  </a>
+</div>
 
 <script>
-/* Loan Calculator Logic */
-const amountRange = document.getElementById("amountRange");
-const monthRange = document.getElementById("monthRange");
-
-const amt = document.getElementById("amt");
-const mVal = document.getElementById("mVal");
-const monthly = document.getElementById("monthly");
-const total = document.getElementById("total");
-const months = document.getElementById("months");
-
-const bLoan = document.getElementById("bLoan");
-const bInterest = document.getElementById("bInterest");
-const bMonthly = document.getElementById("bMonthly");
-const bTotal = document.getElementById("bTotal");
+const amountRange=document.getElementById("amountRange");
+const monthRange=document.getElementById("monthRange");
+const amt=document.getElementById("amt");
+const mVal=document.getElementById("mVal");
+const monthly=document.getElementById("monthly");
+const total=document.getElementById("total");
+const months=document.getElementById("months");
+const bLoan=document.getElementById("bLoan");
+const bInterest=document.getElementById("bInterest");
+const bMonthly=document.getElementById("bMonthly");
+const bTotal=document.getElementById("bTotal");
 
 function calc(){
-  const P = +amountRange.value;
-  const n = +monthRange.value;
-  const r = 0.00833; // 0.833% monthly
+  const P=+amountRange.value;
+  const n=+monthRange.value;
+  const r=0.00833;
 
-  const totalPay = Math.round(P * Math.pow(1+r, n));
-  const monthlyPay = Math.round(totalPay / n);
-  const interest = totalPay - P;
+  const emi=Math.round(P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1));
+  const totalPay=emi*n;
+  const interest=totalPay-P;
 
-  amt.innerText = P.toLocaleString();
-  mVal.innerText = n;
-  months.innerText = n + " මාස";
+  amt.innerText=P.toLocaleString();
+  mVal.innerText=n;
+  months.innerText=n+" මාස";
 
-  monthly.innerText = "රු " + monthlyPay.toLocaleString();
-  total.innerText = "රු " + totalPay.toLocaleString();
+  monthly.innerText="රු "+emi.toLocaleString();
+  total.innerText="රු "+totalPay.toLocaleString();
 
-  bLoan.innerText = "රු " + P.toLocaleString();
-  bInterest.innerText = "රු " + interest.toLocaleString();
-  bMonthly.innerText = "රු " + monthlyPay.toLocaleString();
-  bTotal.innerText = "රු " + totalPay.toLocaleString();
+  bLoan.innerText="රු "+P.toLocaleString();
+  bInterest.innerText="රු "+interest.toLocaleString();
+  bMonthly.innerText="රු "+emi.toLocaleString();
+  bTotal.innerText="රු "+totalPay.toLocaleString();
 }
 
-amountRange.oninput = calc;
-monthRange.oninput = calc;
+amountRange.oninput=calc;
+monthRange.oninput=calc;
 calc();
-
-/* Loan Steps Animation */
-const steps = document.querySelectorAll(".loan-steps .step");
-window.addEventListener("scroll", ()=>{
-  steps.forEach(step=>{
-    const rect = step.getBoundingClientRect();
-    if(rect.top < window.innerHeight - 50){
-      step.classList.add("show");
-    }
-  });
-});
-
-/* Image Animation */
-const imgSection = document.querySelector(".image-section");
-window.addEventListener("scroll", ()=>{
-  const rect = imgSection.getBoundingClientRect();
-  if(rect.top < window.innerHeight - 50){
-    imgSection.classList.add("show");
-  }
-});
-
-/* FAQ Expandable */
-document.querySelectorAll(".faq-item").forEach(item=>{
-  item.querySelector(".faq-title").addEventListener("click", ()=>{
-    item.classList.toggle("open");
-  });
-});
-
-/* Footer Animation */
-const footer = document.querySelector("footer");
-window.addEventListener("scroll", ()=>{
-  const rect = footer.getBoundingClientRect();
-  if(rect.top < window.innerHeight){
-    footer.classList.add("show");
-  }
-});
 </script>
 
 </body>
-</html>         
+</html>
