@@ -181,7 +181,7 @@ button:active{transform:scale(0.96);}
   <div class="results">
     <div class="box">
       <div class="label">පොලී අනුපාතය</div>
-      <div class="value">1.1% (මාසික)<br>≈ 13.2% (වාර්ෂික)</div>
+      <div class="value">0.833% (මාසික)<br>≈ 10% (වාර්ෂික)</div>
     </div>
     <div class="box">
       <div class="label">මාසික වාරිකය</div>
@@ -227,7 +227,7 @@ const bTotal = document.getElementById("bTotal");
 function calc(){
   const P = +amountRange.value;
   const n = +monthRange.value;
-  const r = 0.011; // 1.1% monthly
+  const r = 0.00833; // 0.833% monthly
 
   const totalPay = Math.round(P * Math.pow(1+r, n));
   const monthlyPay = Math.round(totalPay / n);
