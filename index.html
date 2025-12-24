@@ -124,10 +124,13 @@ input[type=range]{width:100%;}
   transform:translateY(30px) scale(0.95);
   transition:all .6s ease;
 }
-.image-section.show img{
-  opacity:1;
-  transform:translateY(0) scale(1);
+.image-section img{
+  width:100%;
+  height:auto;
+  image-rendering:auto;
+  -webkit-transform: translateZ(0);
 }
+
 
 /* CONTACT */
 .contact-item{
@@ -249,8 +252,12 @@ footer{
 </div>
 
 <div class="card image-section">
-  <img src="<a href="https://ibb.co/ccSBYFjj"><img src="https://i.ibb.co/ccSBYFjj/IMG-0483.png" alt="IMG-0483" border="0"></a>" alt="Loan App">
+  <img 
+    src="https://i.ibb.co/ccSBYFjj/IMG-0483.png" 
+    alt="Loan App"
+    loading="lazy">
 </div>
+
 
 <div class="card">
   <a href="tel:+94740436005" class="contact-item">
