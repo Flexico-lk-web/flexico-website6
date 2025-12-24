@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>eZycredit App</title>
-<meta name="theme-color" content="#16c172">
+<title>Loan Calculator</title>
 
 <style>
 :root{
@@ -21,101 +20,90 @@ body{
  background:var(--bg);
 }
 
-/* TOPBAR */
-.topbar{
- position:sticky;top:0;background:#fff;padding:12px;
- display:flex;justify-content:space-between;align-items:center;
- box-shadow:0 3px 10px rgba(0,0,0,.05);
-}
-.logo{display:flex;gap:10px;align-items:center;}
-.logo-box{
- width:42px;height:42px;border-radius:10px;
- background:linear-gradient(135deg,var(--green),var(--dark));
- color:#fff;font-weight:800;
- display:flex;align-items:center;justify-content:center;
-}
-.lang-btn{
- border:none;background:#f1f5f4;
- padding:6px 14px;border-radius:20px;font-weight:700;
-}
-
 /* CARD */
 .card{
- background:#fff;margin:14px;padding:16px;
- border-radius:16px;
- box-shadow:0 10px 25px rgba(0,0,0,.06);
+ background:#fff;
+ margin:16px;
+ padding:18px;
+ border-radius:18px;
+ box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 .hero{
  background:linear-gradient(90deg,var(--green),var(--dark));
- color:#fff;padding:20px;border-radius:14px;
- text-align:center;font-weight:800;
+ color:#fff;
+ padding:18px;
+ border-radius:14px;
+ text-align:center;
+ font-weight:800;
+ font-size:16px;
 }
 
-/* SLIDERS */
-.amount{display:flex;justify-content:space-between;margin-top:14px;font-weight:700;}
-input[type=range]{width:100%;margin:6px 0 14px;}
+.amount{
+ display:flex;
+ justify-content:space-between;
+ margin-top:14px;
+ font-weight:700;
+}
+input[type=range]{
+ width:100%;
+ margin:8px 0 14px;
+}
 
 /* RESULTS */
 .results{
- display:grid;grid-template-columns:1fr 1fr;
- gap:10px;margin-top:10px;
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+ margin-top:10px;
 }
 .box{
- background:#f6faf8;padding:10px;border-radius:10px;
+ background:#f6faf8;
+ padding:12px;
+ border-radius:12px;
 }
-.label{font-size:12px;color:var(--muted);}
-.value{font-weight:800;}
+.label{
+ font-size:12px;
+ color:var(--muted);
+}
+.value{
+ font-weight:800;
+ font-size:15px;
+}
 
 /* BREAKDOWN */
 .breakdown{
- margin-top:16px;
+ margin-top:18px;
  background:#f9fcfb;
- border-radius:12px;
  padding:14px;
+ border-radius:14px;
 }
 .breakdown h4{
- margin:0 0 10px;
- color:#0aa764;
+ margin:0 0 12px;
+ color:var(--dark);
 }
 .row{
  display:flex;
  justify-content:space-between;
- font-size:14px;
  margin:6px 0;
+ font-size:14px;
 }
-.row strong{font-weight:700;}
-
-.apply{
- margin-top:16px;width:100%;padding:14px;
- background:linear-gradient(90deg,var(--green),var(--dark));
- color:#fff;border:none;border-radius:14px;
- font-size:16px;font-weight:800;
-}
+.row strong{font-weight:800;}
 </style>
 </head>
 
 <body>
 
-<div class="topbar">
- <div class="logo">
-  <div class="logo-box">eZ</div>
-  <div>
-   <strong>eZycredit</strong><br>
-   <small>ඔබේ විශ්වාසදායක ණය සහකරු</small>
-  </div>
- </div>
- <button class="lang-btn">EN</button>
-</div>
-
 <div class="card">
- <div class="hero">ක්ෂණික මුදල් රු.500,000 දක්වා</div>
+ <div class="hero">
+  Online Loan Calculator
+ </div>
 
- <!-- AMOUNT -->
+ <!-- LOAN AMOUNT -->
  <div class="amount">
   <span>ණය මුදල</span>
-  <span>රු <span id="amt">30,000</span></span>
+  <span>රු <span id="amt">500,000</span></span>
  </div>
- <input type="range" min="30000" max="500000" step="10000" value="30000" id="amountRange">
+ <input type="range" min="30000" max="500000" step="10000" value="500000" id="amountRange">
 
  <!-- MONTHS -->
  <div class="amount">
@@ -127,8 +115,8 @@ input[type=range]{width:100%;margin:6px 0 14px;}
  <!-- RESULTS -->
  <div class="results">
   <div class="box">
-   <div class="label">පොලී</div>
-   <div class="value">1.5% (මාසික)</div>
+   <div class="label">පොලී අනුපාතය</div>
+   <div class="value">1.1% (මාසික)<br>≈ 13.2% (වාර්ෂික)</div>
   </div>
   <div class="box">
    <div class="label">මාසික වාරිකය</div>
@@ -146,14 +134,12 @@ input[type=range]{width:100%;margin:6px 0 14px;}
 
  <!-- BREAKDOWN -->
  <div class="breakdown">
-  <h4>Finance Breakdown</h4>
+  <h4>Finance Company Breakdown</h4>
   <div class="row"><span>ණය මුදල</span><strong id="bLoan">රු 0</strong></div>
   <div class="row"><span>මුළු පොලිය</span><strong id="bInterest">රු 0</strong></div>
   <div class="row"><span>මාසික වාරිකය</span><strong id="bMonthly">රු 0</strong></div>
   <div class="row"><span>මුළු ගෙවීම</span><strong id="bTotal">රු 0</strong></div>
  </div>
-
- <button class="apply">අයදුම් කරන්න</button>
 </div>
 
 <script>
@@ -174,9 +160,9 @@ const bTotal = document.getElementById("bTotal");
 function calc(){
  const P = +amountRange.value;
  const n = +monthRange.value;
- const r = 0.015;
+ const r = 0.011; // 1.1% monthly
 
- const totalPay = Math.round(P * Math.pow(1+r, n));
+ const totalPay = Math.round(P * Math.pow(1 + r, n));
  const monthlyPay = Math.round(totalPay / n);
  const interest = totalPay - P;
 
