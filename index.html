@@ -11,7 +11,6 @@
 :root{
   --green:#16c172;
   --green-dark:#0aa764;
-  --green-soft:#e9f7f1;
   --bg:#f4f8f8;
   --card:#ffffff;
   --text-main:#0c1328;
@@ -56,7 +55,7 @@ body{
   box-shadow:0 10px 25px rgba(0,0,0,.06);
 }
 
-/* HERO */
+/* HERO TEXT */
 .hero{
   background:linear-gradient(90deg,var(--green),var(--green-dark));
   color:#fff;
@@ -66,22 +65,23 @@ body{
   font-weight:800;
 }
 
-/* IMAGE (SAFE FOR MOBILE) */
+/* BANNER IMAGE */
+.image-section{
+  margin:14px;
+  border-radius:16px;
+  overflow:hidden;
+}
+
 .image-section img{
   width:100%;
   height:auto;
   display:block;
-  border-radius:14px;
-
-  /* default visible */
-  opacity:1;
-  transform:none;
-
-  image-rendering:auto;
+  max-height:800px;
+  object-fit:cover;
   backface-visibility:hidden;
 }
 
-/* animation only if supported */
+/* ANIMATION */
 .image-section.animate img{
   opacity:0;
   transform:translateY(24px);
@@ -92,7 +92,13 @@ body{
   transform:translateY(0);
 }
 
-/* BUTTON */
+/* APPLY BUTTON */
+.sticky{
+  position:fixed;
+  bottom:12px;
+  left:12px;
+  right:12px;
+}
 .apply{
   width:100%;
   padding:14px;
@@ -113,18 +119,20 @@ footer{
   color:#7b8794;
 }
 
-/* STICKY */
-.sticky{
-  position:fixed;
-  bottom:12px;
-  left:12px;
-  right:12px;
+/* DESKTOP ONLY */
+@media(min-width:768px){
+  .sticky{
+    position:static;
+    margin:20px auto;
+    max-width:400px;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<!-- TOP BAR -->
 <div class="topbar">
   <div class="logo">
     <div class="logo-box">eZ</div>
@@ -135,23 +143,29 @@ footer{
   </div>
 </div>
 
+<!-- HERO TEXT -->
 <div class="card">
-  <div class="hero">ක්ෂණික මුදල් රු.500,000 දක්වා</div>
+  <div class="hero">ක්ෂණික ණය පහසුකම් රු. 500,000 දක්වා</div>
 </div>
 
-<div class="https://i.ibb.co/3YQdh2HX/IMG-0483-1.png" id="imgBox">
-  <img 
+<!-- BANNER IMAGE -->
+<div class="image-section" id="imgBox">
+  <img
     src="https://i.ibb.co/ccSBYFjj/IMG-0483.png"
-    alt="Loan App"
-    loading="lazy"
+    alt="eZycredit Loan Banner"
+    width="1920"
+    height="800"
+    loading="eager"
     decoding="async">
 </div>
 
+<!-- FOOTER -->
 <footer>
-© 2019 – 2025 A V Business Solutions (Pvt) Ltd<br>
+©️ 2019 – 2025 A V Business Solutions (Pvt) Ltd<br>
 All Rights Reserved
 </footer>
 
+<!-- APPLY BUTTON -->
 <div class="sticky">
   <a href="https://wa.me/94740436005">
     <button class="apply">Apply Now</button>
@@ -161,9 +175,7 @@ All Rights Reserved
 <script>
 const box = document.getElementById("imgBox");
 
-/* CHECK IntersectionObserver SUPPORT */
 if ("IntersectionObserver" in window) {
-
   box.classList.add("animate");
 
   const observer = new IntersectionObserver(entries=>{
@@ -175,9 +187,7 @@ if ("IntersectionObserver" in window) {
   },{threshold:0.3});
 
   observer.observe(box);
-
 } else {
-  /* OLD MOBILE → FORCE SHOW */
   box.classList.add("show");
 }
 </script>
